@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ecosystem.local/schemas/envelope.schema.json",
+  "title": "SyncEnvelope",
+  "description": "Canonical wire format for all cross-app exchange in the athlete performance ecosystem. Neutral source of truth mirrored by the TypeScript types in src/ and the Python bindings in python/. Keep this file, src/, and python/ in sync (see VERSIONING.md).",
+  "type": "object",
+  "required": ["syncSchemaVersion", "sourceApp", "exportedAt", "idempotencyKey", "payloadType", "payload", "payloadSchemaVersion"],
+  "properties": {
+    "syncSchemaVersion": { "type": "string", "description": "Envelope format version. Current: 1.0.0." },
+    "sourceApp": { "$ref": "#/$defs/SourceApp" },
+    "exportedAt": { "type": "string", "format": "date-time" },
+    "idempotencyKey": { "type": "string", "format": "uuid" },
+    "payloadType": { "$ref": "#/$defs/SyncPayloadType" },
+    "payload": { "type": "object" },
+    "payloadSchemaVersion": { "type": "string" },
+    "externalTraceId": { "type": "string" }
+  },
+  "allOf": [
+    { "$ref": "#/$defs/EnvelopePayloadDiscriminator" }
+  ],
+  "$defs": {
+    "SourceApp": {
+      "type": "string",
+      "enum": ["athleteOS", "swimStatePro", "olbrechtSystem", "formLab", "triathletePro", "olyStatePro", "sentiOS"]
+    },
+    "SyncPayloadType": {
+      "type": "string",
+      "enum": ["athleteUpsert", "sessionPlanUpsert", "sessionResponseUpsert", "derivedMetricsUpsert", "readinessSnapshotUpsert", "raceEventUpsert", "biomechReportUpsert", "movementRedFlagUpsert", "observationUpsert"]
+    },
+    "InternalSystem": { "type": "string", "enum": ["neurological", "muscular", "cardiovascular"] },
+    "ReadinessCategory": { "type": "string", "enum": ["green", "yellow", "orange", "red"] },
+    "SessionClass": { "type": "string", "enum": ["neuralSprint", "musclePowerEndurance", "anaerobicCapacity", "racePace", "aerobicBase", "thresholdAerobicPower", "recoveryTechnique"] },
+    "IntensityDomain": { "type": "string", "enum": ["low", "moderate", "heavy", "severe", "extreme"] },
+    "EnergySystemFocus": { "type": "string", "enum": ["neurological", "muscular", "cardiovascular"] },
+    "PoolCourse": { "type": "string", "enum": ["lcm", "scm", "yards", "openWater"] },
+    "RacePriority": { "type": "string", "enum": ["low", "secondary", "primary"] },
+    "SportContext": { "type": "string", "enum": ["swim", "bike", "run", "lift", "other"] },
+    "MovementRedFlagSeverity": { "type": "string", "enum": ["info", "caution", "warning", "critical"] },
+    "DataConfidenceLevel": { "type": "string", "enum": ["HIGH", "MEDIUM", "LOW"] },
+
+    "SystemFatigueState": {
+      "type": "object",
+      "description": "Per-system fatigue on the Olbrecht -6..+4 scale (0 = baseline).",
+      "required": ["neurological", "muscular", "cardiovascular"],
+      "properties": {
+        "neurological": { "type": "integer", "minimum": -6, "maximum": 4 },
+        "muscular": { "type": "integer", "minimum": -6, "maximum": 4 },
+        "cardiovascular": { "type": "integer", "minimum": -6, "maximum": 4 }
+      }
+    },
+    "SystemReadinessCategoryMap": {
+      "type": "object",
+      "required": ["neurological", "muscular", "cardiovascular"],
+      "properties": {
+        "neurological": { "$ref": "#/$defs/ReadinessCategory" },
+        "muscular": { "$ref": "#/$defs/ReadinessCategory" },
+        "cardiovascular": { "$ref": "#/$defs/ReadinessCategory" }
+      }
+    },
+    "SystemScores0to100": {
+      "type": "object",
+      "required": ["neurological", "muscular", "cardiovascular"],
+      "properties": {
+        "neurological": { "type": "number" },
+        "muscular": { "type": "number" },
+        "cardiovascular": { "type": "number" }
+      }
+    },
+    "SharedAthleteLink": {
+      "type": "object",
+      "required": ["sharedAthleteId", "sourceApp", "sourceAthleteId", "matchConfidence", "matchMethod", "createdAt"],
+      "properties": {
+        "sharedAthleteId": { "type": "string", "format": "uuid" },
+        "sourceApp": { "$ref": "#/$defs/SourceApp" },
+        "sourceAthleteId": { "type": "string", "format": "uuid" },
+        "externalStableKey": { "type": "string" },
+        "matchConfidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "matchMethod": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+
+    "AthleteUpsertPayload": {
+      "type": "object",
+      "required": ["sharedAthleteId", "sourceAthleteId", "sourceApp", "profile"],
+      "properties": {
+        "sharedAthleteId": { "type": "string", "format": "uuid" },
+        "sourceAthleteId": { "type": "string", "format": "uuid" },
+        "sourceApp": { "$ref": "#/$defs/SourceApp" },
+        "externalStableKey": { "type": "string" },
+        "profile": {
+          "type": "object",
+          "required": ["givenName", "familyName", "timezone", "createdAt", "updatedAt"],
+          "properties": {
+            "givenName": { "type": "string" },
+            "familyName": { "type": "string" },
+            "dateOfBirth": { "type": "string", "format": "date" },
+            "sex": { "type": "string" },
+            "primaryTeamId": { "type": "string" },
+            "timezone": { "type": "string" },
+            "createdAt": { "type": "string", "format": "date-time" },
+            "updatedAt": { "type": "string", "format": "date-time" }
+          }
+        }
+      }
+    },
+
+    "ReadinessSnapshotUpsertPayload": {
+      "type": "object",
+      "required": ["sharedAthleteId", "snapshotDate", "timeZone", "systemReadinessCategory", "globalReadinessCategory", "createdAt"],
+      "properties": {
+        "sharedAthleteId": { "type": "string", "format": "uuid" },
+        "snapshotDate": { "type": "string", "format": "date" },
+        "timeZone": { "type": "string" },
+        "sport": { "$ref": "#/$defs/SportContext" },
+        "systemReadinessCategory": { "$ref": "#/$defs/SystemReadinessCategoryMap" },
+        "globalReadinessCategory": { "$ref": "#/$defs/ReadinessCategory" },
+        "systemFatigue": { "$ref": "#/$defs/SystemFatigueState" },
+        "systemScores0to100": { "$ref": "#/$defs/SystemScores0to100" },
+        "compositeScore0to100": { "type": "number" },
+        "categoryBanding": { "type": "string" },
+        "psychScore0to100": { "type": "number" },
+        "psychVolatilityPercent": { "type": "number" },
+        "sleepScore": { "type": "number" },
+        "dataQuality": {
+          "type": "object",
+          "required": ["confidenceLevel"],
+          "properties": {
+            "hrvAvailable": { "type": "boolean" },
+            "sleepQualityAvailable": { "type": "boolean" },
+            "muscleSorenessAvailable": { "type": "boolean" },
+            "trainingLoadComplete": { "type": "boolean" },
+            "confidenceLevel": { "$ref": "#/$defs/DataConfidenceLevel" }
+          }
+        },
+        "extensions": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+
+    "BiomechReportUpsertPayload": {
+      "type": "object",
+      "required": ["sharedAthleteId", "reportId", "capturedAt", "sport", "movementElement", "analysisMethod", "analysisVersion", "confidence0to1", "metrics", "createdAt"],
+      "properties": {
+        "sharedAthleteId": { "type": "string", "format": "uuid" },
+        "reportId": { "type": "string", "format": "uuid" },
+        "capturedAt": { "type": "string", "format": "date-time" },
+        "sport": { "$ref": "#/$defs/SportContext" },
+        "movementElement": { "type": "string" },
+        "analysisMethod": { "type": "string" },
+        "analysisVersion": { "type": "string" },
+        "confidence0to1": { "type": "number", "minimum": 0, "maximum": 1 },
+        "metrics": { "type": "object" },
+        "summary": { "type": "string" },
+        "videoAssetRef": { "type": "string" },
+        "linkedSessionId": { "type": "string", "format": "uuid" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+
+    "MovementRedFlagUpsertPayload": {
+      "type": "object",
+      "required": ["sharedAthleteId", "redFlagId", "observedAt", "sport", "movementElement", "dysfunctionCode", "description", "severity", "recoveryCostEstimate", "confidence0to1", "createdAt"],
+      "properties": {
+        "sharedAthleteId": { "type": "string", "format": "uuid" },
+        "redFlagId": { "type": "string", "format": "uuid" },
+        "observedAt": { "type": "string", "format": "date-time" },
+        "sport": { "$ref": "#/$defs/SportContext" },
+        "movementElement": { "type": "string" },
+        "dysfunctionCode": { "type": "string" },
+        "description": { "type": "string" },
+        "severity": { "$ref": "#/$defs/MovementRedFlagSeverity" },
+        "recoveryCostEstimate": {
+          "type": "object",
+          "description": "0..1 relative additional recovery cost per internal system; any subset of systems.",
+          "properties": {
+            "neurological": { "type": "number", "minimum": 0, "maximum": 1 },
+            "muscular": { "type": "number", "minimum": 0, "maximum": 1 },
+            "cardiovascular": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "confidence0to1": { "type": "number", "minimum": 0, "maximum": 1 },
+        "linkedReportId": { "type": "string", "format": "uuid" },
+        "linkedSessionId": { "type": "string", "format": "uuid" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+
+    "ObservationUpsertPayload": {
+      "type": "object",
+      "required": ["sharedAthleteId", "observationId", "observedAt", "sport", "sourceType", "observationKind", "values", "createdAt"],
+      "properties": {
+        "sharedAthleteId": { "type": "string", "format": "uuid" },
+        "observationId": { "type": "string", "format": "uuid" },
+        "observedAt": { "type": "string", "format": "date-time" },
+        "sport": { "$ref": "#/$defs/SportContext" },
+        "sourceType": { "type": "string" },
+        "observationKind": { "type": "string" },
+        "values": { "type": "object" },
+        "confidence0to1": { "type": "number", "minimum": 0, "maximum": 1 },
+        "notes": { "type": "string" },
+        "linkedSessionId": { "type": "string", "format": "uuid" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+
+    "RaceEventUpsertPayload": {
+      "type": "object",
+      "required": ["sharedAthleteId", "raceEventId", "eventDate", "course", "priority", "targetEvents", "createdAt", "updatedAt"],
+      "properties": {
+        "sharedAthleteId": { "type": "string", "format": "uuid" },
+        "raceEventId": { "type": "string", "format": "uuid" },
+        "eventDate": { "type": "string", "format": "date" },
+        "course": { "$ref": "#/$defs/PoolCourse" },
+        "priority": { "$ref": "#/$defs/RacePriority" },
+        "targetEvents": { "type": "array", "items": { "type": "string" } },
+        "taperStartDate": { "type": "string", "format": "date" },
+        "taperEndDate": { "type": "string", "format": "date" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+
+    "EnvelopePayloadDiscriminator": {
+      "description": "Couples payloadType to the matching payload shape for the three payloads validated cross-language today. Session/derived payloads are validated by the Olbrecht domain types and TypeScript; they are accepted here as generic objects and will be tightened in a later minor version.",
+      "oneOf": [
+        {
+          "properties": {
+            "payloadType": { "const": "readinessSnapshotUpsert" },
+            "payload": { "$ref": "#/$defs/ReadinessSnapshotUpsertPayload" }
+          }
+        },
+        {
+          "properties": {
+            "payloadType": { "const": "biomechReportUpsert" },
+            "payload": { "$ref": "#/$defs/BiomechReportUpsertPayload" }
+          }
+        },
+        {
+          "properties": {
+            "payloadType": { "const": "movementRedFlagUpsert" },
+            "payload": { "$ref": "#/$defs/MovementRedFlagUpsertPayload" }
+          }
+        },
+        {
+          "properties": {
+            "payloadType": { "const": "observationUpsert" },
+            "payload": { "$ref": "#/$defs/ObservationUpsertPayload" }
+          }
+        },
+        {
+          "properties": {
+            "payloadType": { "const": "athleteUpsert" },
+            "payload": { "$ref": "#/$defs/AthleteUpsertPayload" }
+          }
+        },
+        {
+          "properties": {
+            "payloadType": { "const": "raceEventUpsert" },
+            "payload": { "$ref": "#/$defs/RaceEventUpsertPayload" }
+          }
+        },
+        {
+          "properties": {
+            "payloadType": { "enum": ["sessionPlanUpsert", "sessionResponseUpsert", "derivedMetricsUpsert"] },
+            "payload": { "type": "object" }
+          }
+        }
+      ]
+    }
+  }
+}

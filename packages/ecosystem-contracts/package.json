@@ -1,0 +1,19 @@
+{
+  "name": "@ecosystem/contracts",
+  "version": "0.1.0",
+  "description": "Shared data-exchange contracts for the athlete performance ecosystem: sync envelopes, payload schemas, identity links, and flow specifications. Seeded from the Olbrecht Energy Tracker sync domain and the Swim State Pro readiness contracts (ratified INTEGRATION_PLAN.md, 2026-06-12).",
+  "private": true,
+  "version_policy": "See VERSIONING.md. Envelope format version lives in SYNC_SCHEMA_VERSION; this npm version tracks the package as a whole.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "schemas",
+    "python"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node test/contracts.test.mjs",
+    "verify": "tsc -p tsconfig.json && node test/contracts.test.mjs"
+  }
+}

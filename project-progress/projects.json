@@ -1,0 +1,1558 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdAt": "2026-06-03",
+  "updatedAt": "2026-06-14",
+  "statusValues": [
+    "todo",
+    "in_progress",
+    "done",
+    "blocked",
+    "deferred",
+    "needs_confirmation"
+  ],
+  "trackingPolicy": {
+    "sourceOfTruth": "Manual milestone records are authoritative. Evidence scans are supporting context only.",
+    "completionModel": "Milestone checklist with no weighted percentage in v1.",
+    "completedAtPolicy": "Use exact dates only when known. For inferred or undated completions, keep completedAt null and cite the source.",
+    "credentialPolicy": "Do not store credentials, API keys, passwords, or password-document contents in this tracker."
+  },
+  "projects": [
+    {
+      "id": "triathlete-pro",
+      "name": "Triathlete Pro",
+      "role": "Triathlon adaptation of the Olbrecht-style energy tracking workflow with React, local Node API, SQLite persistence, and shared calculation logic.",
+      "rootPath": "C:\\Users\\dlee5\\OneDrive\\Documents\\Triathlete Pro",
+      "activeCodePaths": [
+        "C:\\Users\\dlee5\\OneDrive\\Documents\\Triathlete Pro"
+      ],
+      "verificationCommands": [
+        {
+          "label": "Full verification gate",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Documents\\Triathlete Pro",
+          "command": "npm run verify"
+        }
+      ],
+      "sourceDocs": [
+        {
+          "title": "README.md",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Documents\\Triathlete Pro\\README.md",
+          "sourceType": "readme",
+          "usedFor": "Purpose, stack, run commands, verification command, model status"
+        },
+        {
+          "title": "MODEL_AUDIT.md",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Documents\\Triathlete Pro\\MODEL_AUDIT.md",
+          "sourceType": "audit",
+          "usedFor": "Implemented model corrections and remaining provisional formula work"
+        }
+      ],
+      "milestones": [
+        {
+          "id": "ttp-shared-calculation-module",
+          "title": "Shared calculation module wired into backend recomputation and persistence",
+          "status": "done",
+          "completedAt": null,
+          "source": "MODEL_AUDIT.md: Implemented Corrections",
+          "evidence": "One shared calculation module lives in src/shared/model.ts; backend session creation and recomputation call it and persist calculation traces.",
+          "blocker": null,
+          "nextAction": "Confirm by running npm run verify and recording the evidence snapshot.",
+          "notes": "Completion is source-explicit but undated."
+        },
+        {
+          "id": "ttp-confidence-warnings-traces",
+          "title": "Calculation outputs include confidence levels, warnings, coefficient versions, and traces",
+          "status": "done",
+          "completedAt": null,
+          "source": "README.md and MODEL_AUDIT.md",
+          "evidence": "README states outputs include coefficient version, confidence level, warnings, and calculation trace.",
+          "blocker": null,
+          "nextAction": "Spot-check persisted session output during first project-specific audit.",
+          "notes": "Completion is source-explicit but undated."
+        },
+        {
+          "id": "ttp-validation-coverage",
+          "title": "Model and database validation coverage exists for current provisional model",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "MODEL_AUDIT.md: Current Validation Coverage",
+          "evidence": "Audit lists pace conversion, load determinism, carryover direction, confidence separation, calibration regression, migrations, seeded accounts, access boundaries, persistence, coefficient precedence, and recomputation.",
+          "blocker": null,
+          "nextAction": "Run npm run verify and confirm all listed checks are represented in the current test suite.",
+          "notes": "The source lists coverage, but this tracker has not yet verified the tests."
+        },
+        {
+          "id": "ttp-literature-review",
+          "title": "Complete literature review and production calibration for formulas",
+          "status": "todo",
+          "completedAt": null,
+          "source": "MODEL_AUDIT.md: Still Provisional",
+          "evidence": "Formula areas needing review include cost of transport, ACSM equations, critical power/W prime, lactate recovery fitting, HRV readiness, and Olbrecht/Mader concepts.",
+          "blocker": null,
+          "nextAction": "Define required source list and acceptance criteria for moving from estimated-default to production coaching use.",
+          "notes": null
+        },
+        {
+          "id": "ttp-athlete-specific-calibration",
+          "title": "Review and activate athlete-specific profile values and coefficients",
+          "status": "todo",
+          "completedAt": null,
+          "source": "README.md: Model Status",
+          "evidence": "Defaults remain estimated until athlete-specific profile values and calibration-derived coefficients are reviewed and activated.",
+          "blocker": null,
+          "nextAction": "Define calibration workflow and criteria for partially-calibrated and fully-calibrated outputs.",
+          "notes": null
+        },
+        {
+          "id": "ttp-baseline-verification",
+          "title": "Record first baseline verification result",
+          "status": "todo",
+          "completedAt": null,
+          "source": "README.md: Verification",
+          "evidence": "The project defines npm run verify as the full gate.",
+          "blocker": null,
+          "nextAction": "Run npm run verify and store result in check-in history.",
+          "notes": null
+        },
+        {
+          "id": "ttp-adopt-shared-contracts",
+          "title": "Adopt shared contracts and map domain ReadinessSnapshot/LoadMetric types to ecosystem envelopes",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Code inspection 2026-06-12: src/shared/domain.ts defines ReadinessSnapshot, LoadMetric, CalibrationTest, CoefficientSet with confidence levels and traces; no references to other systems exist.",
+          "blocker": null,
+          "nextAction": "Add a translation layer from src/shared/domain.ts types to ReadinessSnapshotUpsert and DerivedMetricsUpsert.",
+          "notes": null
+        },
+        {
+          "id": "ttp-publish-to-hub",
+          "title": "Publish triathlon readiness and load envelopes to AthleteOS",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Add an outbox and push path from the local Node API once hub ingestion exists.",
+          "notes": null
+        },
+        {
+          "id": "ttp-sentios-signals",
+          "title": "Emit TriathleteTracker required events to SentiOS",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Wire SentiClient into API startup and calculation persistence paths.",
+          "notes": null
+        }
+      ],
+      "checkIns": [
+        {
+          "date": "2026-06-03",
+          "type": "baseline",
+          "summary": "Initial tracker baseline seeded from README.md and MODEL_AUDIT.md.",
+          "notes": [
+            "No git commits exist yet, so commit history is not used as completion evidence.",
+            "Known model work is marked done only where the audit explicitly listed implemented corrections."
+          ]
+        },
+        {
+          "date": "2026-06-12",
+          "type": "integration-planning",
+          "summary": "Integration milestones added from INTEGRATION_PLAN.md after code-level inspection of all seven projects.",
+          "notes": [
+            "See project-progress/INTEGRATION_PLAN.md for architecture, phasing, and dependencies."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "olystate-pro",
+      "name": "OlyState Pro",
+      "role": "Coach-facing Olympic weightlifting readiness dashboard with a manual-first model and normalized observations for future sensor support.",
+      "rootPath": "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro",
+      "activeCodePaths": [
+        "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro"
+      ],
+      "verificationCommands": [
+        {
+          "label": "Domain tests",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro",
+          "command": "npm test"
+        },
+        {
+          "label": "Production build",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro",
+          "command": "npm run build"
+        },
+        {
+          "label": "Planned session e2e flow",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro",
+          "command": "npm run test:e2e"
+        }
+      ],
+      "sourceDocs": [
+        {
+          "title": "README.md",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro\\README.md",
+          "sourceType": "readme",
+          "usedFor": "Purpose, model notes, run commands, verification commands"
+        },
+        {
+          "title": "docs/olystate-framework.md",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro\\docs\\olystate-framework.md",
+          "sourceType": "framework",
+          "usedFor": "Detailed calculation framework, pending follow-up inspection"
+        }
+      ],
+      "milestones": [
+        {
+          "id": "osp-readiness-dashboard",
+          "title": "Manual-first Olympic weightlifting readiness dashboard",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "README.md",
+          "evidence": "README describes a coach-facing readiness dashboard and manual-first first version.",
+          "blocker": null,
+          "nextAction": "Run the app or e2e flow and confirm the dashboard workflow is available.",
+          "notes": "The README describes intended/current behavior, but this tracker has not verified it."
+        },
+        {
+          "id": "osp-system-state-model",
+          "title": "Four-system state model for neural, muscular, connective, and autonomic readiness",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "README.md: Model Notes",
+          "evidence": "README defines hidden systemState from -6 to +4 and the four tracked systems.",
+          "blocker": null,
+          "nextAction": "Inspect docs/olystate-framework.md and tests to confirm the model implementation.",
+          "notes": null
+        },
+        {
+          "id": "osp-technical-attempt-separation",
+          "title": "Separate technical readiness and attempt confidence from physiological readiness",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "README.md: Model Notes",
+          "evidence": "README states technical readiness and attempt confidence are separate from physiological readiness.",
+          "blocker": null,
+          "nextAction": "Confirm the UI and engine preserve this separation.",
+          "notes": null
+        },
+        {
+          "id": "osp-pain-guardrails",
+          "title": "Pain-region guardrails constrain recommendations without diagnosing injury",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "README.md: Model Notes",
+          "evidence": "README states pain-region guardrails constrain recommendations.",
+          "blocker": null,
+          "nextAction": "Inspect framework docs and tests for guardrail behavior.",
+          "notes": null
+        },
+        {
+          "id": "osp-baseline-verification",
+          "title": "Record first baseline test, build, and e2e results",
+          "status": "todo",
+          "completedAt": null,
+          "source": "README.md and package.json",
+          "evidence": "Project defines npm test, npm run build, and npm run test:e2e.",
+          "blocker": null,
+          "nextAction": "Run all three verification commands and store the results.",
+          "notes": null
+        },
+        {
+          "id": "osp-future-sensor-ingestion",
+          "title": "Add future observation sources without replacing the calculation engine",
+          "status": "deferred",
+          "completedAt": null,
+          "source": "README.md",
+          "evidence": "README names future sources: bar velocity, force plates, video, IMUs, HR straps, wearables, scales, and recovery devices.",
+          "blocker": null,
+          "nextAction": "Define first sensor integration only after the manual-first workflow is validated.",
+          "notes": "Deferred by product sequencing, not blocked."
+        },
+        {
+          "id": "osp-exportable-persistence",
+          "title": "Add exportable persistence beyond localStorage as the integration precondition",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Code inspection 2026-06-12: storage.ts persists the whole dataset to a single localStorage key with no export path.",
+          "blocker": null,
+          "nextAction": "Choose file export/import or a lightweight backend; required before any sync work.",
+          "notes": null
+        },
+        {
+          "id": "osp-observation-envelopes",
+          "title": "Map normalized observations to ecosystem envelopes, including FormLab video observations",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Code inspection 2026-06-12: sensorAdapters.ts already defines a video_formlab observation source type.",
+          "blocker": null,
+          "nextAction": "Define the ObservationUpsert payload in the contracts package and an import path for FormLab-derived observations.",
+          "notes": null
+        },
+        {
+          "id": "osp-sentios-signals",
+          "title": "Emit OlyState required events to SentiOS",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Wire SentiClient (or direct HTTP) at session save and readiness calculation points.",
+          "notes": null
+        }
+      ],
+      "checkIns": [
+        {
+          "date": "2026-06-03",
+          "type": "baseline",
+          "summary": "Initial tracker baseline seeded from README.md.",
+          "notes": [
+            "No git commits exist yet, so commit history is not used as completion evidence."
+          ]
+        },
+        {
+          "date": "2026-06-12",
+          "type": "integration-planning",
+          "summary": "Integration milestones added from INTEGRATION_PLAN.md after code-level inspection of all seven projects.",
+          "notes": [
+            "See project-progress/INTEGRATION_PLAN.md for architecture, phasing, and dependencies."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sentios",
+      "name": "SentiOS",
+      "role": "Local monitoring and verification layer for AthleteOS-integrated modules; reports signal presence and routing integrity without interpreting athlete biology.",
+      "rootPath": "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+      "activeCodePaths": [
+        "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS"
+      ],
+      "verificationCommands": [
+        {
+          "label": "Typecheck",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+          "command": "npm run typecheck"
+        },
+        {
+          "label": "Test suite",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+          "command": "npm test"
+        },
+        {
+          "label": "Build",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+          "command": "npm run build"
+        },
+        {
+          "label": "Package smoke",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+          "command": "npm run smoke:packaged"
+        },
+        {
+          "label": "Windows directory package",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+          "command": "npm run package:win"
+        }
+      ],
+      "sourceDocs": [
+        {
+          "title": "README.md",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS\\README.md",
+          "sourceType": "readme",
+          "usedFor": "Purpose, local development, API key behavior, verification and packaging commands"
+        }
+      ],
+      "milestones": [
+        {
+          "id": "sentios-monitoring-layer",
+          "title": "Local monitoring layer reports signal presence, routing completeness, latency, integrity, orphaning, required-event coverage, and history",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "README.md",
+          "evidence": "README describes the monitoring and verification scope.",
+          "blocker": null,
+          "nextAction": "Run the app and inspect dashboard endpoints against the described monitoring states.",
+          "notes": null
+        },
+        {
+          "id": "sentios-electron-next-api",
+          "title": "Electron desktop shell, Next.js renderer, and local API run together",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "README.md: Local Development",
+          "evidence": "README states npm run dev starts the Next.js renderer and Electron desktop shell; API binds to 127.0.0.1:4777 or nearby fallback.",
+          "blocker": null,
+          "nextAction": "Run local dev startup and record whether renderer, shell, and API connect cleanly.",
+          "notes": null
+        },
+        {
+          "id": "sentios-local-api-key",
+          "title": "Local API key protects mutation and ingestion endpoints",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "README.md: Local API Key",
+          "evidence": "README states external clients must send x-sentios-api-key for mutations and ingestion; read-only dashboard endpoints stay unauthenticated on loopback.",
+          "blocker": null,
+          "nextAction": "Run auth/API tests and confirm key creation, storage, and endpoint enforcement.",
+          "notes": null
+        },
+        {
+          "id": "sentios-windows-packaging",
+          "title": "Windows installer and packaged smoke test workflow",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "README.md: Windows Installer",
+          "evidence": "README documents npm run dist:win, npm run package:win, and npm run smoke:packaged.",
+          "blocker": null,
+          "nextAction": "Run package smoke and record artifact status under dist-release or packaged output.",
+          "notes": null
+        },
+        {
+          "id": "sentios-baseline-verification",
+          "title": "Record first typecheck, test, build, audit, and package baseline",
+          "status": "todo",
+          "completedAt": null,
+          "source": "README.md: Verification",
+          "evidence": "README lists typecheck, tests, build, npm audit, and Windows packaging commands.",
+          "blocker": null,
+          "nextAction": "Run verification commands and store results in check-in history.",
+          "notes": null
+        },
+        {
+          "id": "sentios-integration-contracts",
+          "title": "Define required-event coverage contracts for each AthleteOS-integrated module",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "README.md purpose statement",
+          "evidence": "Code inspection 2026-06-12: src/shared/modules.ts already defines required events for SwimState, FormLab, OlbrechtEngine, AthleteOSCore, OlyState, TriathleteTracker, and RecoveryAI, with example emitters under examples/.",
+          "blocker": null,
+          "nextAction": "Review the defined required events against INTEGRATION_PLAN.md Section 4 flows and confirm they match the planned integration milestones.",
+          "notes": null
+        },
+        {
+          "id": "sentios-package-sdk",
+          "title": "Package the SentiClient SDK for consumption by all ecosystem apps",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Code inspection 2026-06-12: src/sdk/client.ts implements SentiClient with register/signal/heartbeat against the local API.",
+          "blocker": null,
+          "nextAction": "Publish the SDK as a local package and document plain-HTTP usage for the Python FormLab Engine.",
+          "notes": null
+        }
+      ],
+      "checkIns": [
+        {
+          "date": "2026-06-03",
+          "type": "baseline",
+          "summary": "Initial tracker baseline seeded from README.md.",
+          "notes": [
+            "No git commits exist yet, so commit history is not used as completion evidence.",
+            "This tracker stores the header name for the local API key but not any key value."
+          ]
+        },
+        {
+          "date": "2026-06-12",
+          "type": "integration-planning",
+          "summary": "Integration milestones added from INTEGRATION_PLAN.md after code-level inspection of all seven projects.",
+          "notes": [
+            "See project-progress/INTEGRATION_PLAN.md for architecture, phasing, and dependencies."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "athleteos",
+      "name": "AthleteOS",
+      "role": "Central athlete intelligence platform and ecosystem hub for dashboards, alerts, long-term timelines, and cross-system orchestration.",
+      "rootPath": "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS",
+      "activeCodePaths": [
+        "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\project-app-1\\project"
+      ],
+      "verificationCommands": [
+        {
+          "label": "Frontend build",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\project-app-1\\project",
+          "command": "npm run build"
+        },
+        {
+          "label": "Frontend lint",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\project-app-1\\project",
+          "command": "npm run lint"
+        },
+        {
+          "label": "Backend build",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\project-app-1\\project\\server",
+          "command": "npm run build"
+        }
+      ],
+      "sourceDocs": [
+        {
+          "title": "AthleteOS explanation of purpose.docx",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\AthleteOS explanation of purpose.docx",
+          "sourceType": "docx",
+          "usedFor": "Project purpose and ecosystem role"
+        },
+        {
+          "title": "Task LIst 11-26-25.docx",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\Task LIst 11-26-25.docx",
+          "sourceType": "task-list",
+          "usedFor": "Phase order and product sequence"
+        },
+        {
+          "title": "To Do List for Functionality.docx",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\To Do List for Functionality.docx",
+          "sourceType": "task-list",
+          "usedFor": "Functional improvement categories and implementation priorities"
+        },
+        {
+          "title": "AUDIT_2026-05-27.md",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\AUDIT_2026-05-27.md",
+          "sourceType": "audit",
+          "usedFor": "Blockers, security issues, missing features, prioritized to-do list"
+        }
+      ],
+      "milestones": [
+        {
+          "id": "aos-purpose-and-hub-role",
+          "title": "Define AthleteOS as central ecosystem hub",
+          "status": "done",
+          "completedAt": null,
+          "source": "AthleteOS explanation of purpose.docx",
+          "evidence": "Document states AthleteOS is the centralized athlete intelligence platform and ecosystem container.",
+          "blocker": null,
+          "nextAction": "Use this role to decide cross-project reporting and integration priority.",
+          "notes": "Purpose definition is complete; implementation remains tracked separately."
+        },
+        {
+          "id": "aos-server-stabilization",
+          "title": "Stabilize server and resolve critical runtime blockers",
+          "status": "todo",
+          "completedAt": null,
+          "source": "Task LIst 11-26-25.docx and AUDIT_2026-05-27.md",
+          "evidence": "CONFIRMED 2026-06-14 by running tsc: the server has 50 pre-existing TypeScript errors (userService 20, fileUploadService 13, notificationService 7, authService 2, queueService 2, jobs 3, users 2, notifications 1) from the half-migrated raw-SQL query() stub and jwt expiresIn typing. Runs under tsx/nodemon (transpile-only) but does NOT npm run build. The May 27 audit was correct; the task list's 'Phase 0 stabilization done' was not. Independent of the integration code, which adds zero errors.",
+          "blocker": null,
+          "nextAction": "Convert remaining raw-SQL query() callers to the Supabase client (or restore a real pg query helper) and fix jwt sign typing, until npm run build passes. Does not block dev-mode hub verification.",
+          "notes": "Reclassified from needs_confirmation to todo: conflicting-source ambiguity resolved by direct verification."
+        },
+        {
+          "id": "aos-real-authentication",
+          "title": "Establish real identity, AuthProvider, login, route guards, and role source of truth",
+          "status": "todo",
+          "completedAt": null,
+          "source": "Task LIst 11-26-25.docx: Phase 1",
+          "evidence": "Phase 1 starts with AuthProvider, login page, route guards, replacing hardcoded demo-user-123, and replacing localStorage role toggle.",
+          "blocker": null,
+          "nextAction": "Inspect current auth implementation and define exact acceptance criteria for Phase 1.",
+          "notes": null
+        },
+        {
+          "id": "aos-data-boundary-decision",
+          "title": "Choose one data architecture boundary",
+          "status": "todo",
+          "completedAt": null,
+          "source": "Task LIst 11-26-25.docx: Phase 2",
+          "evidence": "Document requires choosing direct Supabase frontend access or backend API for all data, and says not to continue hybrid after the decision.",
+          "blocker": null,
+          "nextAction": "Make and record the boundary decision before building more end-to-end features.",
+          "notes": "Default in the source document is Option A unless told otherwise."
+        },
+        {
+          "id": "aos-first-end-to-end-feature",
+          "title": "Build first end-to-end backend/frontend feature",
+          "status": "todo",
+          "completedAt": null,
+          "source": "Task LIst 11-26-25.docx: Phase 3",
+          "evidence": "Source gives two options: notifications or file uploads.",
+          "blocker": null,
+          "nextAction": "Pick notifications or file uploads, then use it to validate token flow, CORS, errors, and service boundaries.",
+          "notes": null
+        },
+        {
+          "id": "aos-coach-workflow",
+          "title": "Build core coach workflow",
+          "status": "todo",
+          "completedAt": null,
+          "source": "Task LIst 11-26-25.docx: Phase 4",
+          "evidence": "Phase 4 includes team management, athlete profiles, performance pages, coach dashboard, and role separation.",
+          "blocker": null,
+          "nextAction": "Break Phase 4 into acceptance-tested milestones after auth and data boundary are settled.",
+          "notes": null
+        },
+        {
+          "id": "aos-tritonwear-data",
+          "title": "Integrate TritonWear data into progression, readiness, and reports",
+          "status": "todo",
+          "completedAt": null,
+          "source": "Task LIst 11-26-25.docx: Phase 5",
+          "evidence": "Phase 5 requires fixing import pipeline, display in progression tab, and generating reports correctly.",
+          "blocker": null,
+          "nextAction": "Verify current import pipeline and map TritonWear records to dashboard/report surfaces.",
+          "notes": null
+        },
+        {
+          "id": "aos-formlab-video-pipeline",
+          "title": "Integrate FormLab video processing pipeline",
+          "status": "deferred",
+          "completedAt": null,
+          "source": "Task LIst 11-26-25.docx: Phase 7",
+          "evidence": "Source says video processing is not needed for launch but needed long-term.",
+          "blocker": null,
+          "nextAction": "Start only after core workflow and FormLab API integration are stable.",
+          "notes": "Deferred by product sequence."
+        },
+        {
+          "id": "aos-production-hardening",
+          "title": "Security, testing, DevOps, monitoring, and backup hardening",
+          "status": "todo",
+          "completedAt": null,
+          "source": "Task LIst 11-26-25.docx: Phase 9 and AUDIT_2026-05-27.md",
+          "evidence": "Phase 9 includes RLS, JWT enforcement, rate limiting, CORS, validation, tests, Docker, CI/CD, monitoring, and backups.",
+          "blocker": null,
+          "nextAction": "Track hardening items after MVP functionality is stabilized, but address credential rotation immediately if still relevant.",
+          "notes": "The audit references exposed credentials; this tracker does not store the values."
+        },
+        {
+          "id": "aos-service-auth",
+          "title": "Add machine-client authentication for app-to-hub sync calls",
+          "status": "in_progress",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Built server/src/middleware/serviceAuth.ts (x-service-key, salted SHA-256 against service_clients) + ops tool src/database/createServiceClient.ts. Typechecks clean in isolation (0 errors in new files).",
+          "blocker": null,
+          "nextAction": "Verify end-to-end after the hub is online (see project-progress/NEEDS_YOUR_HANDS.md Phase 1), then mark done.",
+          "notes": "Depends on aos-real-authentication."
+        },
+        {
+          "id": "aos-canonical-athlete-registry",
+          "title": "Issue canonical athlete UUIDs and serve the athlete link registry",
+          "status": "in_progress",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Built services/registryService.ts (resolveOrCreate by link/externalStableKey/mint; getRecord) + routes/registry.ts (POST /api/registry/athletes, GET /api/registry/athletes/:id). sourceApp taken from the service key, never the body.",
+          "blocker": null,
+          "nextAction": "Verify end-to-end after the hub is online (see project-progress/NEEDS_YOUR_HANDS.md Phase 1), then mark done.",
+          "notes": null
+        },
+        {
+          "id": "aos-sync-ingestion-api",
+          "title": "Implement sync inbox: POST /api/sync/push with idempotency, conflict detection, and envelope persistence",
+          "status": "in_progress",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Built services/syncService.push (validate via vendored contracts, dedupe by idempotencyKey with conflict detection, store envelope, project to typed tables) + routes/sync.ts POST /api/sync/push (batch, per-app authorization). Migration supabase/migrations/0002_sync_and_registry.sql adds sync_envelopes + projection tables (idempotent).",
+          "blocker": null,
+          "nextAction": "Verify end-to-end after the hub is online (see project-progress/NEEDS_YOUR_HANDS.md Phase 1), then mark done.",
+          "notes": null
+        },
+        {
+          "id": "aos-sync-pull-relay",
+          "title": "Implement GET /api/sync/pull consumer relay so spoke apps can consume each other's published envelopes",
+          "status": "in_progress",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Built syncService.pull (cursor-paged, excludes consumer's own envelopes, optional type filter) + routes/sync.ts GET /api/sync/pull. Cursor is sync_envelopes.cursor_seq (bigint identity).",
+          "blocker": null,
+          "nextAction": "Verify end-to-end after the hub is online (see project-progress/NEEDS_YOUR_HANDS.md Phase 1), then mark done.",
+          "notes": null
+        },
+        {
+          "id": "aos-replace-mock-integration-routes",
+          "title": "Replace mock tritonwear/biomechanics/readiness routes with real queries over ingested data",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Swap mockData routes for projection-table queries once Phase 2-3 feeds land.",
+          "notes": "Depends on aos-sync-ingestion-api and live feeds."
+        },
+        {
+          "id": "aos-sentios-signals",
+          "title": "Emit AthleteOSCore required events to SentiOS",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Wire SentiClient into server startup, sync ingestion, and module status paths.",
+          "notes": null
+        }
+      ],
+      "checkIns": [
+        {
+          "date": "2026-06-03",
+          "type": "baseline",
+          "summary": "Initial tracker baseline seeded from purpose doc, task lists, and May 27 audit.",
+          "notes": [
+            "Server stabilization has conflicting source evidence and is not marked done.",
+            "Credential-bearing values were not copied into this tracker."
+          ]
+        },
+        {
+          "date": "2026-06-12",
+          "type": "integration-planning",
+          "summary": "Integration milestones added from INTEGRATION_PLAN.md after code-level inspection of all seven projects.",
+          "notes": [
+            "See project-progress/INTEGRATION_PLAN.md for architecture, phasing, and dependencies."
+          ]
+        },
+        {
+          "date": "2026-06-14",
+          "type": "integration-progress",
+          "summary": "Phase 1 hub code complete: service auth, canonical athlete registry, and /api/sync push+pull with projection tables and migration 0002. New code typechecks clean (0 errors); 50 pre-existing server errors confirmed and logged under aos-server-stabilization.",
+          "notes": [
+            "End-to-end verification pending hub bring-up (project-progress/NEEDS_YOUR_HANDS.md)."
+          ]
+        },
+        {
+          "date": "2026-06-14",
+          "type": "maintenance",
+          "summary": "De-Bolted: active folder renamed project-bolt-sb1-icvn4ddu -> project-app-1 (confirmed canonical AthleteOS codebase) and the .bolt scaffold dir renamed to .app. activeCodePaths and verification command cwds updated to the new path.",
+          "notes": [
+            "Code intact at C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\project-app-1\\project; Phase 1 hub files moved with the folder (relative imports unaffected)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "formlab",
+      "name": "FormLab",
+      "role": "Biomechanics and technical execution system for swim and lift analysis using force, motion, video, and physics-oriented movement data.",
+      "rootPath": "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab",
+      "activeCodePaths": [
+        "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab-App\\project",
+        "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab-Engine"
+      ],
+      "verificationCommands": [
+        {
+          "label": "FormLab App typecheck",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab-App\\project",
+          "command": "npm run typecheck"
+        },
+        {
+          "label": "FormLab App build",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab-App\\project",
+          "command": "npm run build"
+        },
+        {
+          "label": "FormLab App lint",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab-App\\project",
+          "command": "npm run lint"
+        }
+      ],
+      "sourceDocs": [
+        {
+          "title": "FORMLAB_AUDIT.md",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FORMLAB_AUDIT.md",
+          "sourceType": "audit",
+          "usedFor": "Current state, blockers, bugs, missing features, and phased to-do list"
+        },
+        {
+          "title": "FormLab Completion Research for the Remaining Missing Components.docx",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab Completion Research for the Remaining Missing Components.docx",
+          "sourceType": "research",
+          "usedFor": "Scientific and schema research for remaining components"
+        },
+        {
+          "title": "FormLab BBPOM Scientific and Technical Specification Blueprint.docx",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab BBPOM Scientific and Technical Specification Blueprint.docx",
+          "sourceType": "spec",
+          "usedFor": "Technical blueprint reference, pending deeper review"
+        }
+      ],
+      "milestones": [
+        {
+          "id": "fl-engine-and-app-exist",
+          "title": "FormLab Engine and FormLab App exist as separate components",
+          "status": "done",
+          "completedAt": null,
+          "source": "FORMLAB_AUDIT.md: What We Have",
+          "evidence": "Audit states FormLab-Engine is a sophisticated Python backend and FormLab-App is a React/TypeScript/Vite wizard backed by Supabase and a mock physics engine.",
+          "blocker": null,
+          "nextAction": "Confirm active code paths and run baseline app checks.",
+          "notes": "Source-explicit but undated."
+        },
+        {
+          "id": "fl-foundation-fixes",
+          "title": "Complete foundation fixes: requirements, env safety, FastAPI import, braking force bug, package name",
+          "status": "todo",
+          "completedAt": null,
+          "source": "FORMLAB_AUDIT.md: Phase 1",
+          "evidence": "Phase 1 lists requirements.txt, removing committed env, removing FastAPI fallback stub, fixing braking force type bug, and renaming package.",
+          "blocker": null,
+          "nextAction": "Verify which Phase 1 items are already fixed and update statuses item-by-item.",
+          "notes": "Package name was observed as formlab in package.json, but this milestone remains todo until all Phase 1 items are verified."
+        },
+        {
+          "id": "fl-app-engine-api-contract",
+          "title": "Connect App to Engine with a real API contract",
+          "status": "in_progress",
+          "completedAt": null,
+          "source": "FORMLAB_AUDIT.md: Critical Blockers and Phase 2",
+          "evidence": "Code inspection 2026-06-12: Engine api.py implements POST /simulate (standalone_hydrodynamic_v1) and the App's physicsEngine.ts calls it with a matching athlete/performance schema via VITE_PHYSICS_ENGINE_URL. POST /analysis/run still returns 501.",
+          "blocker": null,
+          "nextAction": "Run App + Engine end-to-end to confirm the /simulate flow, then design the full /analysis/run contract.",
+          "notes": "Audit-era blocker was stale: a minimal compatible contract now exists; the full analysis contract is still missing."
+        },
+        {
+          "id": "fl-schema-and-data-store-alignment",
+          "title": "Align App and Engine schemas and choose one data store strategy",
+          "status": "blocked",
+          "completedAt": null,
+          "source": "FORMLAB_AUDIT.md: Critical Blockers and Phase 2",
+          "evidence": "Audit states App submits a simple Athlete type while the Engine requires registered athlete, mechanical profile, session capture, video assets, tags, and optional trajectory samples; App uses Supabase while Engine uses SQLite. Code inspection 2026-06-12: /simulate works without shared persistence, but the stores remain disconnected for the full analysis pipeline.",
+          "blocker": "App and Engine currently use incompatible schemas and disconnected persistence.",
+          "nextAction": "Choose Engine SQLite read endpoints or Supabase serialization as the single integration path.",
+          "notes": null
+        },
+        {
+          "id": "fl-surface-engine-outputs",
+          "title": "Surface joint angles, torques, confidence, legality notes, recommendations, and race sections in UI",
+          "status": "todo",
+          "completedAt": null,
+          "source": "FORMLAB_AUDIT.md: Phase 3",
+          "evidence": "Audit lists several outputs the Engine computes or types that the App does not display.",
+          "blocker": null,
+          "nextAction": "Implement after the API contract and schema alignment are stable.",
+          "notes": null
+        },
+        {
+          "id": "fl-user-athlete-management",
+          "title": "Add authentication, athlete profiles, scoped history, pagination, and filtering",
+          "status": "todo",
+          "completedAt": null,
+          "source": "FORMLAB_AUDIT.md: Phase 4",
+          "evidence": "Audit lists auth, profile page, logged-in user scoping, pagination, and filters.",
+          "blocker": null,
+          "nextAction": "Define ownership model and Supabase/Auth boundary after data-store decision.",
+          "notes": null
+        },
+        {
+          "id": "fl-engine-internals-cleanup",
+          "title": "Clean up Engine internals and migration strategy",
+          "status": "todo",
+          "completedAt": null,
+          "source": "FORMLAB_AUDIT.md: Phase 5",
+          "evidence": "Audit calls out service.py size, repetitive persistence, fragile migrations, missing POST /analysis/run implementation, and CORS wildcard.",
+          "blocker": null,
+          "nextAction": "Refactor after minimum viable App/Engine integration is proven.",
+          "notes": null
+        },
+        {
+          "id": "fl-deployment-ci-export",
+          "title": "Add deployment, CI, export/share, and video tagging workflow",
+          "status": "deferred",
+          "completedAt": null,
+          "source": "FORMLAB_AUDIT.md: Phase 6",
+          "evidence": "Audit lists Docker, docker-compose, CI, video asset/tagging workflow, export/share, and error boundaries.",
+          "blocker": null,
+          "nextAction": "Start after endpoint, schema, and basic output display are working.",
+          "notes": "Deferred behind integration blockers."
+        },
+        {
+          "id": "fl-movement-redflag-payload",
+          "title": "Define and emit MovementRedFlag/BiomechReport envelopes with a recovery-cost estimate",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Specify payload fields with Swim State Pro (dysfunction type, severity, recovery-cost estimate, confidence), add them to the contracts package, and emit after analysis.",
+          "notes": "This is the docs' FormLab→Swim State recovery-cost flow."
+        },
+        {
+          "id": "fl-consume-python-bindings",
+          "title": "Consume generated Python schema bindings in the Engine",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Add the contracts package codegen output to Engine requirements and validate envelopes at boundaries.",
+          "notes": null
+        },
+        {
+          "id": "fl-publish-to-hub",
+          "title": "Push biomech reports and red flags to the AthleteOS sync API",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Implement push from the App or Engine once aos-sync-ingestion-api exists.",
+          "notes": null
+        },
+        {
+          "id": "fl-sentios-signals",
+          "title": "Emit FormLab required events to SentiOS",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Use the existing SentiOS examples/formlab.ts as the wiring template.",
+          "notes": null
+        }
+      ],
+      "checkIns": [
+        {
+          "date": "2026-06-03",
+          "type": "baseline",
+          "summary": "Initial tracker baseline seeded from FORMLAB_AUDIT.md and completion research docs.",
+          "notes": [
+            "Two active code paths are tracked because the App and Engine are separate.",
+            "The central blockers are App/Engine API incompatibility and data model mismatch."
+          ]
+        },
+        {
+          "date": "2026-06-12",
+          "type": "integration-planning",
+          "summary": "Integration milestones added from INTEGRATION_PLAN.md after code-level inspection of all seven projects.",
+          "notes": [
+            "See project-progress/INTEGRATION_PLAN.md for architecture, phasing, and dependencies."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "swim-state-pro",
+      "name": "Swim State Pro",
+      "role": "Readiness, rhythm, taper, fatigue, and performance prediction layer for swim training decisions.",
+      "rootPath": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro",
+      "activeCodePaths": [
+        "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\swim-state-pro-2"
+      ],
+      "verificationCommands": [
+        {
+          "label": "Production build",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\swim-state-pro-2",
+          "command": "npm run build"
+        },
+        {
+          "label": "Lint",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\swim-state-pro-2",
+          "command": "npm run lint"
+        },
+        {
+          "label": "Vitest run",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\swim-state-pro-2",
+          "command": "npm run test:run"
+        }
+      ],
+      "sourceDocs": [
+        {
+          "title": "Codex Work Folder/AUDIT_AND_TODO.md",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\Codex Work Folder\\AUDIT_AND_TODO.md",
+          "sourceType": "audit",
+          "usedFor": "Completed work, issues, missing features, and prioritized to-do list"
+        },
+        {
+          "title": "remaining tasks in order.docx",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\remaining tasks in order.docx",
+          "sourceType": "task-list",
+          "usedFor": "Additional remaining-task context, pending deeper follow-up"
+        },
+        {
+          "title": "Algorithmic Specification of a 3-System Athlete Readiness Model.pdf",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\Algorithmic Specification of a 3-System Athlete Readiness Model.pdf",
+          "sourceType": "pdf",
+          "usedFor": "Algorithmic background reference, pending deeper follow-up"
+        }
+      ],
+      "milestones": [
+        {
+          "id": "ssp-canonical-engine-migration",
+          "title": "Canonical readiness engine migration complete",
+          "status": "done",
+          "completedAt": null,
+          "source": "AUDIT_AND_TODO.md: What Is Complete and Working",
+          "evidence": "Audit states readiness-engine/src has real implementations and UI utils are adapter shims.",
+          "blocker": null,
+          "nextAction": "Keep engine math inside readiness-engine boundary for future changes.",
+          "notes": "Source-explicit but undated."
+        },
+        {
+          "id": "ssp-main-feature-set",
+          "title": "Main app feature set rendered and wired",
+          "status": "done",
+          "completedAt": null,
+          "source": "AUDIT_AND_TODO.md: Features Built and Wired",
+          "evidence": "Audit lists 11 tabs, RBAC auth, migrations, TritonWear CSV import, reports, mobile nav, autosave, rhythm inputs, recovery matrix, taper config, multi-event modeling, coach portal, onboarding, daily check-in, and notifications.",
+          "blocker": null,
+          "nextAction": "Verify feature health with build, tests, and selected UI flows.",
+          "notes": "Source-explicit but undated."
+        },
+        {
+          "id": "ssp-remove-dead-import-aliases",
+          "title": "Remove dead import aliases in src/App.tsx",
+          "status": "done",
+          "completedAt": "2026-05-29",
+          "source": "AUDIT_AND_TODO.md: Immediate Cleanup",
+          "evidence": "Audit marks removal of HowToUseGuideAlias, TrainingProgressionAlias, and TrainingProgressionAgain done 2026-05-29.",
+          "blocker": null,
+          "nextAction": "None unless aliases reappear.",
+          "notes": "Known completed date preserved."
+        },
+        {
+          "id": "ssp-rename-storage-service",
+          "title": "Rename boltStorage.ts to athleteDataService.ts and update imports",
+          "status": "done",
+          "completedAt": "2026-05-29",
+          "source": "AUDIT_AND_TODO.md: Immediate Cleanup",
+          "evidence": "Audit marks rename done 2026-05-29 with 7 importers updated.",
+          "blocker": null,
+          "nextAction": "None unless misleading storage naming returns.",
+          "notes": "Known completed date preserved."
+        },
+        {
+          "id": "ssp-remove-empty-utils-export",
+          "title": "Remove empty readiness-engine utils export surface",
+          "status": "done",
+          "completedAt": "2026-05-29",
+          "source": "AUDIT_AND_TODO.md: Immediate Cleanup",
+          "evidence": "Audit marks removal done 2026-05-29 because nothing consumed the empty namespace.",
+          "blocker": null,
+          "nextAction": "None unless a real utils namespace is later needed.",
+          "notes": "Known completed date preserved."
+        },
+        {
+          "id": "ssp-env-and-deployment",
+          "title": "Create env/deployment setup",
+          "status": "todo",
+          "completedAt": null,
+          "source": "AUDIT_AND_TODO.md: High Priority",
+          "evidence": "Audit calls for .env.example, ensuring lib/db.ts reads env vars, and deployment setup.",
+          "blocker": null,
+          "nextAction": "Create .env.example and README deployment section, then decide Vercel or Netlify config.",
+          "notes": null
+        },
+        {
+          "id": "ssp-core-calculation-tests",
+          "title": "Write regression tests for core calculation pipeline",
+          "status": "todo",
+          "completedAt": null,
+          "source": "AUDIT_AND_TODO.md: High Priority",
+          "evidence": "Audit says calculation pipeline lacks tests for known athlete state to session to expected readiness score and prediction output.",
+          "blocker": null,
+          "nextAction": "Define fixture athlete states and expected readiness/prediction outputs.",
+          "notes": null
+        },
+        {
+          "id": "ssp-coach-realtime-and-permissions",
+          "title": "Add coach realtime updates and decide coach write permissions",
+          "status": "todo",
+          "completedAt": null,
+          "source": "AUDIT_AND_TODO.md: Medium Priority",
+          "evidence": "Audit calls for Supabase realtime subscription and coach write permission decision.",
+          "blocker": null,
+          "nextAction": "Choose coach notes/annotations vs read-only, then implement realtime subscriptions.",
+          "notes": null
+        },
+        {
+          "id": "ssp-pwa-mobile-install",
+          "title": "Add PWA manifest and icons for mobile installability",
+          "status": "todo",
+          "completedAt": null,
+          "source": "AUDIT_AND_TODO.md: Medium Priority",
+          "evidence": "Audit states serviceWorker.ts exists but app is not installable on mobile.",
+          "blocker": null,
+          "nextAction": "Add public manifest and icons, then verify installability.",
+          "notes": null
+        },
+        {
+          "id": "ssp-refactor-and-strategy-growth",
+          "title": "Refactor App.tsx and expand strategy layer",
+          "status": "deferred",
+          "completedAt": null,
+          "source": "AUDIT_AND_TODO.md: Lower Priority",
+          "evidence": "Audit calls out App.tsx at 1,829 lines and thin strategy modules.",
+          "blocker": null,
+          "nextAction": "Refactor by major tab and add event selection/season planning only after high-priority deployment/tests.",
+          "notes": "Deferred behind high-priority production readiness work."
+        },
+        {
+          "id": "ssp-adopt-shared-contracts",
+          "title": "Adopt the shared contracts package and map ReadinessLog to the ReadinessSnapshot envelope",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Code inspection 2026-06-12: readiness-engine/src/contracts/readiness.ts defines ReadinessLog with score, system fatigue, and data quality; no sync surface exists.",
+          "blocker": null,
+          "nextAction": "Add an adapter in the readiness-engine contracts layer translating ReadinessLog to ReadinessSnapshotUpsert.",
+          "notes": null
+        },
+        {
+          "id": "ssp-canonical-athlete-link",
+          "title": "Store canonical athlete UUID mapping alongside local athlete records",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Add athlete link storage and a link flow against the AthleteOS registry.",
+          "notes": null
+        },
+        {
+          "id": "ssp-outbound-readiness-publishing",
+          "title": "Publish daily readiness snapshots and system flags to the hub via outbox push",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Implement an outbox table and push worker with idempotency keys against POST /api/sync/push.",
+          "notes": null
+        },
+        {
+          "id": "ssp-ingest-formlab-movement-cost",
+          "title": "Ingest FormLab movement-dysfunction payloads as recovery-cost inputs to the fatigue model",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Define how MovementRedFlag maps to fatigue/recovery inputs in the readiness engine, then consume via hub pull.",
+          "notes": "This is the docs' FormLab→Swim State flow."
+        },
+        {
+          "id": "ssp-sentios-signals",
+          "title": "Emit SwimState required events to SentiOS",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Wire SentiClient emission at login, readiness calculation, and sync push points.",
+          "notes": null
+        }
+      ],
+      "checkIns": [
+        {
+          "date": "2026-06-03",
+          "type": "baseline",
+          "summary": "Initial tracker baseline seeded from Codex Work Folder/AUDIT_AND_TODO.md.",
+          "notes": [
+            "Known 2026-05-29 completed cleanup dates were preserved.",
+            "Build status at audit time was passing, but this tracker has not rerun build/test."
+          ]
+        },
+        {
+          "date": "2026-06-12",
+          "type": "integration-planning",
+          "summary": "Integration milestones added from INTEGRATION_PLAN.md after code-level inspection of all seven projects.",
+          "notes": [
+            "See project-progress/INTEGRATION_PLAN.md for architecture, phasing, and dependencies."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "olbrecht-energy-tracker",
+      "name": "Olbrecht Energy Tracker",
+      "role": "Metabolic energy-system planning and mismatch detection system for swim training based on Olbrecht-style physiological logic.",
+      "rootPath": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker",
+      "activeCodePaths": [
+        "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\app\\project"
+      ],
+      "verificationCommands": [
+        {
+          "label": "Frontend typecheck",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\app\\project",
+          "command": "npm run typecheck"
+        },
+        {
+          "label": "Engine tests",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\app\\project",
+          "command": "npm run test:engine"
+        },
+        {
+          "label": "Frontend build",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\app\\project",
+          "command": "npm run build"
+        },
+        {
+          "label": "Server typecheck",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\app\\project\\server",
+          "command": "npm run typecheck"
+        }
+      ],
+      "sourceDocs": [
+        {
+          "title": "FINALIZED MVP FEATURE LIST.docx",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\FINALIZED MVP FEATURE LIST.docx",
+          "sourceType": "mvp-list",
+          "usedFor": "MVP scope, role-based access, manual entry, mismatch detection, dashboard, export flow"
+        },
+        {
+          "title": "Olbrecht_Final_Engineering_Lock_Specification.docx",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\Olbrecht_Final_Engineering_Lock_Specification.docx",
+          "sourceType": "engineering-lock",
+          "usedFor": "Locked implementation spec, deterministic classes, thresholds, mismatch, readiness, recommendations, integration constraints"
+        },
+        {
+          "title": "Olbrecht_Tracker_Technical_Handoff.docx",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\Olbrecht_Tracker_Technical_Handoff.docx",
+          "sourceType": "handoff",
+          "usedFor": "Technical handoff reference, pending deeper follow-up"
+        }
+      ],
+      "excludedSources": [
+        {
+          "title": "Olbrecht Triathlete Energy System Tracker App Supabase password.docx",
+          "reason": "Credential-related document. Do not inspect or store contents in tracker."
+        }
+      ],
+      "milestones": [
+        {
+          "id": "oet-engineering-lock",
+          "title": "Finalize engineering lock specification",
+          "status": "done",
+          "completedAt": null,
+          "source": "Olbrecht_Final_Engineering_Lock_Specification.docx",
+          "evidence": "Document status is implementation locked and precedence rule says it governs until a newer engineering lock is issued.",
+          "blocker": null,
+          "nextAction": "Use this document as implementation reference until a newer lock is issued.",
+          "notes": "Specification completion is source-explicit but undated."
+        },
+        {
+          "id": "oet-mvp-feature-list",
+          "title": "Finalize MVP feature list",
+          "status": "done",
+          "completedAt": null,
+          "source": "FINALIZED MVP FEATURE LIST.docx",
+          "evidence": "Document is titled finalized MVP feature list and defines core modes, entry flows, TritonWear fields, mismatch detection, dashboards, and export flow.",
+          "blocker": null,
+          "nextAction": "Map each MVP feature to implementation status in the active code path.",
+          "notes": "Scope definition is done; implementation is tracked separately."
+        },
+        {
+          "id": "oet-classifier-probabilities",
+          "title": "Implement deterministic session classification and probability distribution",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "Olbrecht_Final_Engineering_Lock_Specification.docx: Sections 2 and 3",
+          "evidence": "Spec defines seven canonical classes, thresholds, priority order, triangular membership functions, softmax temperature, and calibration modes.",
+          "blocker": null,
+          "nextAction": "Inspect active engine code and tests for achievedClassTop, achievedClassDistribution, classifierTemperature, and calibrationMode.",
+          "notes": "Spec is locked, but implementation status has not yet been confirmed."
+        },
+        {
+          "id": "oet-mismatch-readiness-recommendations",
+          "title": "Implement mismatch model, readiness bands, warnings, and recommendation engine",
+          "status": "needs_confirmation",
+          "completedAt": null,
+          "source": "Olbrecht_Final_Engineering_Lock_Specification.docx: Sections 4-6",
+          "evidence": "Spec defines mismatch components, class-specific weights, weight reflow, system load allocation, readiness bands, warning triggers, and recommendations.",
+          "blocker": null,
+          "nextAction": "Confirm engine implementation and test coverage for mismatch/readiness/recommendation outputs.",
+          "notes": null
+        },
+        {
+          "id": "oet-role-based-access",
+          "title": "Implement Coach, Athlete, and Rehab Staff visibility and access rules",
+          "status": "todo",
+          "completedAt": null,
+          "source": "FINALIZED MVP FEATURE LIST.docx",
+          "evidence": "MVP requires Coach/Rehab view/edit all athlete data and athletes view/edit their own only; TritonWear data visible to coach and rehab only, never athletes.",
+          "blocker": null,
+          "nextAction": "Verify current auth/role model and define enforcement points.",
+          "notes": null
+        },
+        {
+          "id": "oet-manual-entry-and-session-linking",
+          "title": "Implement manual athlete session entry and coach/rehab TritonWear entry with auto-linking",
+          "status": "todo",
+          "completedAt": null,
+          "source": "FINALIZED MVP FEATURE LIST.docx",
+          "evidence": "MVP defines session info, subjective scores, session type, TritonWear data sections, stroke toggles, autofill support, and auto-linking by athlete/date/time.",
+          "blocker": null,
+          "nextAction": "Map MVP input fields to current UI and data schema, then fill gaps.",
+          "notes": null
+        },
+        {
+          "id": "oet-dashboard-mismatch-trends",
+          "title": "Implement daily review, mismatch trends, system strain summaries, and energy distribution dashboards",
+          "status": "todo",
+          "completedAt": null,
+          "source": "FINALIZED MVP FEATURE LIST.docx",
+          "evidence": "MVP requires mismatch flagging, override/approval, weekly review, summaries, trend visuals, strain summaries, and heatmaps.",
+          "blocker": null,
+          "nextAction": "Confirm which dashboard pieces already exist, then break remaining work into UI and engine milestones.",
+          "notes": null
+        },
+        {
+          "id": "oet-export-ai-analysis-flow",
+          "title": "Support structured export/download, external AI analysis upload, and coach notification",
+          "status": "todo",
+          "completedAt": null,
+          "source": "FINALIZED MVP FEATURE LIST.docx",
+          "evidence": "MVP requests rehab staff export/download, external AI upload, athlete file attachment, and in-app notification to coach.",
+          "blocker": null,
+          "nextAction": "Define export format and upload/notification workflow.",
+          "notes": null
+        },
+        {
+          "id": "oet-swim-state-sync",
+          "title": "Sync cleanly with Swim State Pro through shared athlete identity, session timing, readiness exchange, and derived output schemas",
+          "status": "todo",
+          "completedAt": null,
+          "source": "Olbrecht_Final_Engineering_Lock_Specification.docx: Scope and architecture",
+          "evidence": "Engineering lock states shared athlete identity, shared session timing, shared readiness exchange, and shared derived output schemas are mandatory.",
+          "blocker": null,
+          "nextAction": "Execute via the Phase 2 milestones in INTEGRATION_PLAN.md: oet-donate-sync-domain, oet-implement-sync-adapter, oet-consume-readiness-modulation, oet-publish-session-envelopes.",
+          "notes": "Superseded in detail by INTEGRATION_PLAN.md (2026-06-12) Phase 2; kept as the umbrella milestone."
+        },
+        {
+          "id": "oet-baseline-verification",
+          "title": "Record first frontend, engine, build, and server verification baseline",
+          "status": "todo",
+          "completedAt": null,
+          "source": "package.json and server/package.json",
+          "evidence": "Project defines frontend typecheck, test:engine, build, and server typecheck commands.",
+          "blocker": null,
+          "nextAction": "Run verification commands and store results in check-in history.",
+          "notes": null
+        },
+        {
+          "id": "oet-donate-sync-domain",
+          "title": "Generalize the Olbrecht sync domain (envelopes, payload types, SourceApp) into the shared contracts package",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Code inspection 2026-06-12: domain defines AnySyncEnvelope, six upsert payload types, SharedAthleteLink/SharedSessionLink, and SourceApp limited to olbrechtSystem and swimStatePro.",
+          "blocker": null,
+          "nextAction": "Extract domain/sync types, extend SourceApp to all ecosystem apps, and consume the shared package back.",
+          "notes": null
+        },
+        {
+          "id": "oet-implement-sync-adapter",
+          "title": "Implement the SwimStateProSyncAdapter against hub push/pull",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Code inspection 2026-06-12: src/adapters/swim-state-pro.adapter.ts is interface-only; no implementation exists and the server exposes only athletes/health routes.",
+          "blocker": null,
+          "nextAction": "Build the HTTP adapter with outbox queue, idempotency, and conflict handling.",
+          "notes": "Directly advances oet-swim-state-sync."
+        },
+        {
+          "id": "oet-consume-readiness-modulation",
+          "title": "Consume Swim State Pro readiness snapshots to modulate session targets per the engineering lock",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Map the ReadinessSnapshot payload into the recommendation engine's fatigue-state inputs.",
+          "notes": null
+        },
+        {
+          "id": "oet-publish-session-envelopes",
+          "title": "Publish SessionPlan, SessionResponse, and DerivedMetrics envelopes to the hub",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Wire envelope construction from engine outputs into the outbox push path.",
+          "notes": null
+        },
+        {
+          "id": "oet-sentios-signals",
+          "title": "Emit OlbrechtEngine required events to SentiOS",
+          "status": "todo",
+          "completedAt": null,
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Wire SentiClient at classification, mismatch, and sync events.",
+          "notes": null
+        }
+      ],
+      "checkIns": [
+        {
+          "date": "2026-06-03",
+          "type": "baseline",
+          "summary": "Initial tracker baseline seeded from finalized MVP feature list and engineering lock specification.",
+          "notes": [
+            "Credential-related password document was intentionally excluded.",
+            "Spec completion and MVP scope definition are done, but implementation status needs confirmation."
+          ]
+        },
+        {
+          "date": "2026-06-12",
+          "type": "integration-planning",
+          "summary": "Integration milestones added from INTEGRATION_PLAN.md after code-level inspection of all seven projects.",
+          "notes": [
+            "See project-progress/INTEGRATION_PLAN.md for architecture, phasing, and dependencies."
+          ]
+        },
+        {
+          "date": "2026-06-14",
+          "type": "maintenance",
+          "summary": "De-Bolted: active folder renamed project-bolt-sb1-opesvvoa -> app (confirmed canonical Olbrecht codebase) and .bolt scaffold dir removed. activeCodePaths and verification command cwds updated to the new path.",
+          "notes": [
+            "Code intact at C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\app\\project."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ecosystem-integration",
+      "name": "Ecosystem Integration",
+      "role": "Cross-cutting unification layer: shared contracts, canonical athlete identity, hub-and-spoke transport, and flow specifications that let all systems communicate while remaining standalone.",
+      "rootPath": "C:\\Users\\dlee5\\OneDrive\\Documents\\MasterMind",
+      "activeCodePaths": [
+        "C:\\Users\\dlee5\\OneDrive\\Documents\\MasterMind\\project-progress"
+      ],
+      "verificationCommands": [
+        {
+          "label": "Render status report",
+          "cwd": "C:\\Users\\dlee5\\OneDrive\\Documents\\MasterMind",
+          "command": "npm run render:report"
+        }
+      ],
+      "sourceDocs": [
+        {
+          "title": "INTEGRATION_PLAN.md",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Documents\\MasterMind\\project-progress\\INTEGRATION_PLAN.md",
+          "sourceType": "plan",
+          "usedFor": "Proposed architecture, gap analysis, phased master task list"
+        },
+        {
+          "title": "Unified Performance System - App Integration Explanation.docx",
+          "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\App Projects Information\\Program Information Documents\\Unified Performance System - App Integration Explanation.docx",
+          "sourceType": "docx",
+          "usedFor": "Intended flow direction and order"
+        }
+      ],
+      "milestones": [
+        {
+          "id": "eco-transport-decision",
+          "title": "Ratify hub-and-spoke transport through AthleteOS with local outbox fallback",
+          "status": "done",
+          "completedAt": "2026-06-12",
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Owner ratified all four INTEGRATION_PLAN.md Section 6 decisions on 2026-06-12: hub-and-spoke transport; readiness precedence rule (revised from engine retirement); contracts seeded from existing Olbrecht/Swim State designs; Swim State-Olbrecht as the first live pair.",
+          "blocker": null,
+          "nextAction": "None. Decisions recorded in INTEGRATION_PLAN.md Section 6.",
+          "notes": "Readiness-ownership was revised at ratification: spoke authoritative for its sport, AthleteOS engine retained for uncovered athletes."
+        },
+        {
+          "id": "eco-contracts-package",
+          "title": "Create shared ecosystem contracts package (envelopes, payload schemas, identity links) as TypeScript + JSON Schema",
+          "status": "done",
+          "completedAt": "2026-06-13",
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "Built at packages/ecosystem-contracts/. TS surface typechecks clean; JSON Schema mirror (schemas/envelope.schema.json, 23 defs) validates; dist emitted (CommonJS, extensionless imports for both Vite apps and Node servers); 9 package tests pass (node test/contracts.test.mjs). README + VERSIONING.md written.",
+          "blocker": null,
+          "nextAction": "Consume from spoke apps starting in Phase 1/2.",
+          "notes": null
+        },
+        {
+          "id": "eco-athlete-identity",
+          "title": "Define canonical athlete identity issuance and per-app link mapping",
+          "status": "done",
+          "completedAt": "2026-06-13",
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "src/identity.ts defines SharedAthleteLink, SharedSessionLink, CanonicalAthleteCreateRequest/Record; AthleteOS specified as UUID issuer (INTEGRATION_PLAN 3.3). Definition complete.",
+          "blocker": null,
+          "nextAction": "Implement the registry endpoints in AthleteOS (Phase 1: aos-canonical-athlete-registry).",
+          "notes": null
+        },
+        {
+          "id": "eco-flow-spec",
+          "title": "Document canonical data flow direction, order, and cadence for every exchange",
+          "status": "done",
+          "completedAt": "2026-06-13",
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "src/flows.ts enumerates all 9 payload flows with producers, consumers, cadence, trigger, and flowOrder, following the docs' FormLab->SwimState->Olbrecht->AthleteOS direction. Compiles clean.",
+          "blocker": null,
+          "nextAction": "Revisit only if a new payload type or flow is introduced.",
+          "notes": null
+        },
+        {
+          "id": "eco-schema-versioning",
+          "title": "Define schema versioning and compatibility policy for envelopes",
+          "status": "done",
+          "completedAt": "2026-06-13",
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "VERSIONING.md written: additive-only minor policy, unknown-field/enum tolerance, major-bump dual-write migration, three-representation sync rule. Envelope carries syncSchemaVersion (1.0.0) + per-payload payloadSchemaVersion.",
+          "blocker": null,
+          "nextAction": "Follow-up (noted in VERSIONING.md): automate python/ regen from schema in CI.",
+          "notes": null
+        },
+        {
+          "id": "eco-python-schema-bindings",
+          "title": "Generate Python bindings from JSON Schemas for the FormLab Engine",
+          "status": "done",
+          "completedAt": "2026-06-13",
+          "source": "INTEGRATION_PLAN.md (2026-06-12)",
+          "evidence": "python/ecosystem_contracts Pydantic v2 bindings mirror the JSON Schema; smoke-tested with pydantic 2.12 (envelope round-trip, wire serialization, unknown-field tolerance all pass). Hand-authored-faithful; codegen automation tracked as a VERSIONING.md follow-up.",
+          "blocker": null,
+          "nextAction": "Wire into the FormLab Engine in Phase 3 (fl-consume-python-bindings).",
+          "notes": "Blocked-by-sequence on the JSON Schema mirror, which is part of finishing eco-contracts-package."
+        }
+      ],
+      "checkIns": [
+        {
+          "date": "2026-06-12",
+          "type": "baseline",
+          "summary": "Project created from INTEGRATION_PLAN.md to track cross-cutting unification work that belongs to no single app.",
+          "notes": [
+            "Current state verified by code inspection of all seven projects on 2026-06-12."
+          ]
+        },
+        {
+          "date": "2026-06-12",
+          "type": "decision",
+          "summary": "All four architecture decisions ratified by the owner; readiness ownership revised to a precedence rule. Phase 0 unblocked.",
+          "notes": [
+            "See INTEGRATION_PLAN.md Sections 3.4 and 6 for the ratified wording."
+          ]
+        },
+        {
+          "date": "2026-06-13",
+          "type": "progress",
+          "summary": "Phase 0 build checkpoint: @ecosystem/contracts TypeScript surface complete and typechecking clean; flow spec done. Remaining Phase 0: JSON Schema, VERSIONING.md, Python bindings, package tests/build.",
+          "notes": [
+            "See project-progress/SESSION_LOG.md (Session 4) for full detail and the resume point."
+          ]
+        },
+        {
+          "date": "2026-06-13",
+          "type": "milestone",
+          "summary": "PHASE 0 COMPLETE. @ecosystem/contracts package built and verified (TS typecheck + 9 tests + dist), JSON Schema mirror, VERSIONING.md, and Python bindings (smoke-tested) all done. Identity + flow + versioning definitions in place.",
+          "notes": [
+            "Next: Phase 1 — AthleteOS hub (service auth, athlete registry, /api/sync/push + /pull, projection tables)."
+          ]
+        }
+      ]
+    }
+  ],
+  "ecosystemSources": [
+    {
+      "title": "Breakdown of Projects.docx",
+      "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\App Projects Information\\Program Information Documents\\Breakdown of Projects.docx",
+      "usedFor": "Ecosystem roles and project differentiation"
+    },
+    {
+      "title": "System Comparison Chart.docx",
+      "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\App Projects Information\\Program Information Documents\\System Comparison Chart.docx",
+      "usedFor": "System comparison, integration layers, and missing-system context"
+    },
+    {
+      "title": "Unified Performance System - App Integration Explanation.docx",
+      "path": "C:\\Users\\dlee5\\OneDrive\\Desktop\\App Projects Information\\Program Information Documents\\Unified Performance System - App Integration Explanation.docx",
+      "usedFor": "Unified integration map and cross-system data flow"
+    }
+  ]
+}

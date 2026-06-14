@@ -1,0 +1,627 @@
+﻿{
+    "generatedAt":  "2026-06-03T07:53:47.9640220-04:00",
+    "mode":  "write",
+    "trackerPath":  "C:\\Users\\dlee5\\OneDrive\\Documents\\MasterMind\\project-progress",
+    "projects":  [
+                     {
+                         "id":  "triathlete-pro",
+                         "name":  "Triathlete Pro",
+                         "root":  {
+                                      "path":  "C:\\Users\\dlee5\\OneDrive\\Documents\\Triathlete Pro",
+                                      "exists":  true,
+                                      "type":  "directory",
+                                      "lastWriteTime":  "2026-05-29T13:13:17.1166209-04:00",
+                                      "length":  null
+                                  },
+                         "activeCodePaths":  [
+                                                 {
+                                                     "path":  "C:\\Users\\dlee5\\OneDrive\\Documents\\Triathlete Pro",
+                                                     "exists":  true,
+                                                     "type":  "directory",
+                                                     "lastWriteTime":  "2026-05-29T13:13:17.1166209-04:00",
+                                                     "length":  null
+                                                 }
+                                             ],
+                         "packageScripts":  [
+                                                {
+                                                    "packagePath":  "C:\\Users\\dlee5\\OneDrive\\Documents\\Triathlete Pro\\package.json",
+                                                    "name":  "triathlete-energy-tracker",
+                                                    "version":  "0.1.0",
+                                                    "scripts":  {
+                                                                    "dev":  "vite",
+                                                                    "server:dev":  "tsx server/index.ts",
+                                                                    "server:start":  "node --import tsx server/index.ts",
+                                                                    "build":  "vite build",
+                                                                    "typecheck":  "tsc -b \u0026\u0026 tsc -p tsconfig.server.json --noEmit",
+                                                                    "lint":  "eslint .",
+                                                                    "test":  "vitest run",
+                                                                    "audit:source":  "node scripts/source-audit.mjs",
+                                                                    "verify":  "npm run audit:source \u0026\u0026 npm run typecheck \u0026\u0026 npm run lint \u0026\u0026 npm run test \u0026\u0026 npm run build",
+                                                                    "preview":  "vite preview"
+                                                                }
+                                                }
+                                            ],
+                         "verificationCommands":  [
+                                                      {
+                                                          "label":  "Full verification gate",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Documents\\Triathlete Pro",
+                                                          "command":  "npm run verify"
+                                                      }
+                                                  ],
+                         "sourceDocs":  [
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Documents\\Triathlete Pro\\README.md",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-05-27T14:14:31.0281919-04:00",
+                                                "length":  1126,
+                                                "title":  "README.md",
+                                                "sourceType":  "readme"
+                                            },
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Documents\\Triathlete Pro\\MODEL_AUDIT.md",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-05-27T14:14:31.1023590-04:00",
+                                                "length":  1655,
+                                                "title":  "MODEL_AUDIT.md",
+                                                "sourceType":  "audit"
+                                            }
+                                        ],
+                         "git":  {
+                                     "isGitRepo":  true,
+                                     "status":  [
+                                                    "git status failed: warning: unable to access \u0027C:\\Users\\dlee5/.config/git/ignore\u0027: Permission denied"
+                                                ],
+                                     "recentCommits":  [
+                                                           "git log failed or no commits yet: fatal: your current branch \u0027master\u0027 does not have any commits yet"
+                                                       ]
+                                 }
+                     },
+                     {
+                         "id":  "olystate-pro",
+                         "name":  "OlyState Pro",
+                         "root":  {
+                                      "path":  "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro",
+                                      "exists":  true,
+                                      "type":  "directory",
+                                      "lastWriteTime":  "2026-05-29T09:48:44.2534154-04:00",
+                                      "length":  null
+                                  },
+                         "activeCodePaths":  [
+                                                 {
+                                                     "path":  "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro",
+                                                     "exists":  true,
+                                                     "type":  "directory",
+                                                     "lastWriteTime":  "2026-05-29T09:48:44.2534154-04:00",
+                                                     "length":  null
+                                                 }
+                                             ],
+                         "packageScripts":  [
+                                                {
+                                                    "packagePath":  "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro\\package.json",
+                                                    "name":  "olystate-pro",
+                                                    "version":  "0.1.0",
+                                                    "scripts":  {
+                                                                    "dev":  "vite --host 127.0.0.1",
+                                                                    "build":  "tsc -b \u0026\u0026 vite build",
+                                                                    "preview":  "node scripts/serve-dist.mjs dist",
+                                                                    "test":  "tsc -p tsconfig.test.json \u0026\u0026 node --test .test-build/domain/engine.test.js",
+                                                                    "test:e2e":  "node e2e/planned-session-flow.cjs"
+                                                                }
+                                                }
+                                            ],
+                         "verificationCommands":  [
+                                                      {
+                                                          "label":  "Domain tests",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro",
+                                                          "command":  "npm test"
+                                                      },
+                                                      {
+                                                          "label":  "Production build",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro",
+                                                          "command":  "npm run build"
+                                                      },
+                                                      {
+                                                          "label":  "Planned session e2e flow",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro",
+                                                          "command":  "npm run test:e2e"
+                                                      }
+                                                  ],
+                         "sourceDocs":  [
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro\\README.md",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-05-27T09:07:00.1674520-04:00",
+                                                "length":  1020,
+                                                "title":  "README.md",
+                                                "sourceType":  "readme"
+                                            },
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Documents\\OlyState Pro\\docs\\olystate-framework.md",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-05-27T09:07:00.3212934-04:00",
+                                                "length":  4186,
+                                                "title":  "docs/olystate-framework.md",
+                                                "sourceType":  "framework"
+                                            }
+                                        ],
+                         "git":  {
+                                     "isGitRepo":  true,
+                                     "status":  [
+                                                    "git status failed: warning: unable to access \u0027C:\\Users\\dlee5/.config/git/ignore\u0027: Permission denied"
+                                                ],
+                                     "recentCommits":  [
+                                                           "git log failed or no commits yet: fatal: your current branch \u0027master\u0027 does not have any commits yet"
+                                                       ]
+                                 }
+                     },
+                     {
+                         "id":  "sentios",
+                         "name":  "SentiOS",
+                         "root":  {
+                                      "path":  "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+                                      "exists":  true,
+                                      "type":  "directory",
+                                      "lastWriteTime":  "2026-05-29T10:27:22.0018841-04:00",
+                                      "length":  null
+                                  },
+                         "activeCodePaths":  [
+                                                 {
+                                                     "path":  "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+                                                     "exists":  true,
+                                                     "type":  "directory",
+                                                     "lastWriteTime":  "2026-05-29T10:27:22.0018841-04:00",
+                                                     "length":  null
+                                                 }
+                                             ],
+                         "packageScripts":  [
+                                                {
+                                                    "packagePath":  "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS\\package.json",
+                                                    "name":  "sentios-desktop",
+                                                    "version":  "0.1.0",
+                                                    "scripts":  {
+                                                                    "dev":  "npm run build:desktop \u0026\u0026 concurrently -k \"next dev --turbopack\" \"wait-on http://127.0.0.1:3000 \u0026\u0026 node scripts/start-electron-dev.cjs\"",
+                                                                    "dev:next":  "next dev --turbopack",
+                                                                    "dev:api":  "tsx src/server/cli.ts",
+                                                                    "build:desktop":  "tsc -p tsconfig.desktop.json",
+                                                                    "build":  "npm run build:desktop \u0026\u0026 next build",
+                                                                    "start":  "npm run build \u0026\u0026 electron dist/electron/main.js",
+                                                                    "prepackage:win":  "node scripts/generate-icon.cjs",
+                                                                    "package:win":  "npm run build \u0026\u0026 npm run prepackage:win \u0026\u0026 electron-builder --win nsis --dir",
+                                                                    "dist:win":  "npm run build \u0026\u0026 npm run prepackage:win \u0026\u0026 electron-builder --win nsis",
+                                                                    "smoke:packaged":  "node scripts/smoke-packaged.cjs",
+                                                                    "test":  "tsx --test tests/contracts.test.ts tests/evaluation.test.ts tests/store.test.ts tests/api.test.ts tests/auth.test.ts tests/settings.test.ts tests/sdk.test.ts tests/packaging.test.ts tests/smoke.test.ts",
+                                                                    "typecheck":  "tsc --noEmit \u0026\u0026 tsc -p tsconfig.desktop.json --noEmit"
+                                                                }
+                                                }
+                                            ],
+                         "verificationCommands":  [
+                                                      {
+                                                          "label":  "Typecheck",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+                                                          "command":  "npm run typecheck"
+                                                      },
+                                                      {
+                                                          "label":  "Test suite",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+                                                          "command":  "npm test"
+                                                      },
+                                                      {
+                                                          "label":  "Build",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+                                                          "command":  "npm run build"
+                                                      },
+                                                      {
+                                                          "label":  "Package smoke",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+                                                          "command":  "npm run smoke:packaged"
+                                                      },
+                                                      {
+                                                          "label":  "Windows directory package",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS",
+                                                          "command":  "npm run package:win"
+                                                      }
+                                                  ],
+                         "sourceDocs":  {
+                                            "path":  "C:\\Users\\dlee5\\OneDrive\\Documents\\SentiOS\\README.md",
+                                            "exists":  true,
+                                            "type":  "file",
+                                            "lastWriteTime":  "2026-05-27T16:15:21.6391196-04:00",
+                                            "length":  1930,
+                                            "title":  "README.md",
+                                            "sourceType":  "readme"
+                                        },
+                         "git":  {
+                                     "isGitRepo":  true,
+                                     "status":  [
+                                                    "git status failed: warning: unable to access \u0027C:\\Users\\dlee5/.config/git/ignore\u0027: Permission denied"
+                                                ],
+                                     "recentCommits":  [
+                                                           "git log failed or no commits yet: fatal: your current branch \u0027master\u0027 does not have any commits yet"
+                                                       ]
+                                 }
+                     },
+                     {
+                         "id":  "athleteos",
+                         "name":  "AthleteOS",
+                         "root":  {
+                                      "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS",
+                                      "exists":  true,
+                                      "type":  "directory",
+                                      "lastWriteTime":  "2026-05-27T08:29:32.6567160-04:00",
+                                      "length":  null
+                                  },
+                         "activeCodePaths":  [
+                                                 {
+                                                     "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\project-bolt-sb1-icvn4ddu\\project",
+                                                     "exists":  true,
+                                                     "type":  "directory",
+                                                     "lastWriteTime":  "2026-05-27T13:42:31.5206960-04:00",
+                                                     "length":  null
+                                                 }
+                                             ],
+                         "packageScripts":  [
+                                                {
+                                                    "packagePath":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\project-bolt-sb1-icvn4ddu\\project\\package.json",
+                                                    "name":  "vite-react-typescript-starter",
+                                                    "version":  "0.0.0",
+                                                    "scripts":  {
+                                                                    "dev":  "vite",
+                                                                    "build":  "vite build",
+                                                                    "lint":  "eslint .",
+                                                                    "preview":  "vite preview"
+                                                                }
+                                                }
+                                            ],
+                         "verificationCommands":  [
+                                                      {
+                                                          "label":  "Frontend build",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\project-bolt-sb1-icvn4ddu\\project",
+                                                          "command":  "npm run build"
+                                                      },
+                                                      {
+                                                          "label":  "Frontend lint",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\project-bolt-sb1-icvn4ddu\\project",
+                                                          "command":  "npm run lint"
+                                                      },
+                                                      {
+                                                          "label":  "Backend build",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\project-bolt-sb1-icvn4ddu\\project\\server",
+                                                          "command":  "npm run build"
+                                                      }
+                                                  ],
+                         "sourceDocs":  [
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\AthleteOS explanation of purpose.docx",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2025-11-01T20:38:34.1737861-04:00",
+                                                "length":  15892,
+                                                "title":  "AthleteOS explanation of purpose.docx",
+                                                "sourceType":  "docx"
+                                            },
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\Task LIst 11-26-25.docx",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2025-11-26T07:58:10.1415465-05:00",
+                                                "length":  22948,
+                                                "title":  "Task LIst 11-26-25.docx",
+                                                "sourceType":  "task-list"
+                                            },
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\To Do List for Functionality.docx",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-04-03T09:39:56.4360126-04:00",
+                                                "length":  20331,
+                                                "title":  "To Do List for Functionality.docx",
+                                                "sourceType":  "task-list"
+                                            },
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\AthleteOS\\AUDIT_2026-05-27.md",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-05-27T08:29:32.6567160-04:00",
+                                                "length":  10105,
+                                                "title":  "AUDIT_2026-05-27.md",
+                                                "sourceType":  "audit"
+                                            }
+                                        ],
+                         "git":  {
+                                     "isGitRepo":  false,
+                                     "status":  [
+
+                                                ],
+                                     "recentCommits":  [
+
+                                                       ]
+                                 }
+                     },
+                     {
+                         "id":  "formlab",
+                         "name":  "FormLab",
+                         "root":  {
+                                      "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab",
+                                      "exists":  true,
+                                      "type":  "directory",
+                                      "lastWriteTime":  "2026-05-29T09:51:33.1987297-04:00",
+                                      "length":  null
+                                  },
+                         "activeCodePaths":  [
+                                                 {
+                                                     "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab-App\\project",
+                                                     "exists":  true,
+                                                     "type":  "directory",
+                                                     "lastWriteTime":  "2026-05-27T13:39:10.4586663-04:00",
+                                                     "length":  null
+                                                 },
+                                                 {
+                                                     "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab-Engine",
+                                                     "exists":  true,
+                                                     "type":  "directory",
+                                                     "lastWriteTime":  "2026-05-29T09:51:58.5340495-04:00",
+                                                     "length":  null
+                                                 }
+                                             ],
+                         "packageScripts":  [
+                                                {
+                                                    "packagePath":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab-App\\project\\package.json",
+                                                    "name":  "formlab",
+                                                    "version":  "0.0.0",
+                                                    "scripts":  {
+                                                                    "dev":  "vite",
+                                                                    "build":  "vite build",
+                                                                    "lint":  "eslint .",
+                                                                    "preview":  "vite preview",
+                                                                    "typecheck":  "tsc --noEmit -p tsconfig.app.json"
+                                                                }
+                                                }
+                                            ],
+                         "verificationCommands":  [
+                                                      {
+                                                          "label":  "FormLab App typecheck",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab-App\\project",
+                                                          "command":  "npm run typecheck"
+                                                      },
+                                                      {
+                                                          "label":  "FormLab App build",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab-App\\project",
+                                                          "command":  "npm run build"
+                                                      },
+                                                      {
+                                                          "label":  "FormLab App lint",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab-App\\project",
+                                                          "command":  "npm run lint"
+                                                      }
+                                                  ],
+                         "sourceDocs":  [
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FORMLAB_AUDIT.md",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-05-27T08:23:57.1876855-04:00",
+                                                "length":  11866,
+                                                "title":  "FORMLAB_AUDIT.md",
+                                                "sourceType":  "audit"
+                                            },
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab Completion Research for the Remaining Missing Components.docx",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-04-03T09:38:16.1416673-04:00",
+                                                "length":  39679,
+                                                "title":  "FormLab Completion Research for the Remaining Missing Components.docx",
+                                                "sourceType":  "research"
+                                            },
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\FormLab\\FormLab BBPOM Scientific and Technical Specification Blueprint.docx",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-04-03T09:38:31.4745726-04:00",
+                                                "length":  44708,
+                                                "title":  "FormLab BBPOM Scientific and Technical Specification Blueprint.docx",
+                                                "sourceType":  "spec"
+                                            }
+                                        ],
+                         "git":  {
+                                     "isGitRepo":  true,
+                                     "status":  [
+                                                    "git status failed: warning: unable to access \u0027C:\\Users\\dlee5/.config/git/ignore\u0027: Permission denied"
+                                                ],
+                                     "recentCommits":  [
+                                                           "git log failed or no commits yet: fatal: your current branch \u0027master\u0027 does not have any commits yet"
+                                                       ]
+                                 }
+                     },
+                     {
+                         "id":  "swim-state-pro",
+                         "name":  "Swim State Pro",
+                         "root":  {
+                                      "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro",
+                                      "exists":  true,
+                                      "type":  "directory",
+                                      "lastWriteTime":  "2026-03-23T10:58:19.7121598-04:00",
+                                      "length":  null
+                                  },
+                         "activeCodePaths":  [
+                                                 {
+                                                     "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\swim-state-pro-2",
+                                                     "exists":  true,
+                                                     "type":  "directory",
+                                                     "lastWriteTime":  "2026-03-22T09:49:40.2906197-04:00",
+                                                     "length":  null
+                                                 }
+                                             ],
+                         "packageScripts":  [
+                                                {
+                                                    "packagePath":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\swim-state-pro-2\\package.json",
+                                                    "name":  "vite-react-typescript-starter",
+                                                    "version":  "0.0.0",
+                                                    "scripts":  {
+                                                                    "dev":  "vite",
+                                                                    "build":  "vite build",
+                                                                    "lint":  "eslint .",
+                                                                    "preview":  "vite preview",
+                                                                    "test":  "vitest",
+                                                                    "test:ui":  "vitest --ui",
+                                                                    "test:run":  "vitest run"
+                                                                }
+                                                }
+                                            ],
+                         "verificationCommands":  [
+                                                      {
+                                                          "label":  "Production build",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\swim-state-pro-2",
+                                                          "command":  "npm run build"
+                                                      },
+                                                      {
+                                                          "label":  "Lint",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\swim-state-pro-2",
+                                                          "command":  "npm run lint"
+                                                      },
+                                                      {
+                                                          "label":  "Vitest run",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\swim-state-pro-2",
+                                                          "command":  "npm run test:run"
+                                                      }
+                                                  ],
+                         "sourceDocs":  [
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\Codex Work Folder\\AUDIT_AND_TODO.md",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-05-29T09:10:40.1996882-04:00",
+                                                "length":  7448,
+                                                "title":  "Codex Work Folder/AUDIT_AND_TODO.md",
+                                                "sourceType":  "audit"
+                                            },
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\remaining tasks in order.docx",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2025-12-24T09:32:26.8389701-05:00",
+                                                "length":  18215,
+                                                "title":  "remaining tasks in order.docx",
+                                                "sourceType":  "task-list"
+                                            },
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Swim State Pro\\Algorithmic Specification of a 3-System Athlete Readiness Model.pdf",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-03-08T17:07:37.8710831-04:00",
+                                                "length":  181367,
+                                                "title":  "Algorithmic Specification of a 3-System Athlete Readiness Model.pdf",
+                                                "sourceType":  "pdf"
+                                            }
+                                        ],
+                         "git":  {
+                                     "isGitRepo":  false,
+                                     "status":  [
+
+                                                ],
+                                     "recentCommits":  [
+
+                                                       ]
+                                 }
+                     },
+                     {
+                         "id":  "olbrecht-energy-tracker",
+                         "name":  "Olbrecht Energy Tracker",
+                         "root":  {
+                                      "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker",
+                                      "exists":  true,
+                                      "type":  "directory",
+                                      "lastWriteTime":  "2026-04-05T17:35:08.6041826-04:00",
+                                      "length":  null
+                                  },
+                         "activeCodePaths":  [
+                                                 {
+                                                     "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\project-bolt-sb1-opesvvoa\\project",
+                                                     "exists":  true,
+                                                     "type":  "directory",
+                                                     "lastWriteTime":  "2026-05-27T16:07:16.7421703-04:00",
+                                                     "length":  null
+                                                 }
+                                             ],
+                         "packageScripts":  [
+                                                {
+                                                    "packagePath":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\project-bolt-sb1-opesvvoa\\project\\package.json",
+                                                    "name":  "olbrecht-energy-tracker",
+                                                    "version":  "0.0.0",
+                                                    "scripts":  {
+                                                                    "dev":  "vite",
+                                                                    "build":  "vite build",
+                                                                    "typecheck":  "tsc -p tsconfig.app.json --noEmit",
+                                                                    "test:engine":  "node scripts/run-engine-tests.mjs",
+                                                                    "lint":  "eslint .",
+                                                                    "preview":  "vite preview"
+                                                                }
+                                                }
+                                            ],
+                         "verificationCommands":  [
+                                                      {
+                                                          "label":  "Frontend typecheck",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\project-bolt-sb1-opesvvoa\\project",
+                                                          "command":  "npm run typecheck"
+                                                      },
+                                                      {
+                                                          "label":  "Engine tests",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\project-bolt-sb1-opesvvoa\\project",
+                                                          "command":  "npm run test:engine"
+                                                      },
+                                                      {
+                                                          "label":  "Frontend build",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\project-bolt-sb1-opesvvoa\\project",
+                                                          "command":  "npm run build"
+                                                      },
+                                                      {
+                                                          "label":  "Server typecheck",
+                                                          "cwd":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\project-bolt-sb1-opesvvoa\\project\\server",
+                                                          "command":  "npm run typecheck"
+                                                      }
+                                                  ],
+                         "sourceDocs":  [
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\FINALIZED MVP FEATURE LIST.docx",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2025-07-15T08:09:05.2494207-04:00",
+                                                "length":  20057,
+                                                "title":  "FINALIZED MVP FEATURE LIST.docx",
+                                                "sourceType":  "mvp-list"
+                                            },
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\Olbrecht_Final_Engineering_Lock_Specification.docx",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-04-03T09:32:54.7124016-04:00",
+                                                "length":  41882,
+                                                "title":  "Olbrecht_Final_Engineering_Lock_Specification.docx",
+                                                "sourceType":  "engineering-lock"
+                                            },
+                                            {
+                                                "path":  "C:\\Users\\dlee5\\OneDrive\\Desktop\\Olbrecht Energy Tracker\\Olbrecht_Tracker_Technical_Handoff.docx",
+                                                "exists":  true,
+                                                "type":  "file",
+                                                "lastWriteTime":  "2026-04-03T09:34:48.4182689-04:00",
+                                                "length":  28878,
+                                                "title":  "Olbrecht_Tracker_Technical_Handoff.docx",
+                                                "sourceType":  "handoff"
+                                            }
+                                        ],
+                         "git":  {
+                                     "isGitRepo":  true,
+                                     "status":  [
+                                                    "git status failed: warning: unable to access \u0027C:\\Users\\dlee5/.config/git/ignore\u0027: Permission denied"
+                                                ],
+                                     "recentCommits":  [
+                                                           "git log failed or no commits yet: fatal: your current branch \u0027master\u0027 does not have any commits yet"
+                                                       ]
+                                 }
+                     }
+                 ]
+}
