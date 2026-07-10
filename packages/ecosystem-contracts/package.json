@@ -14,6 +14,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "node test/contracts.test.mjs",
-    "verify": "tsc -p tsconfig.json && node test/contracts.test.mjs"
+    "check-vendored": "node scripts/check-vendored.mjs",
+    "verify": "tsc -p tsconfig.json && node test/contracts.test.mjs && node scripts/check-vendored.mjs"
   }
 }

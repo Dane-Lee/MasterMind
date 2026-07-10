@@ -81,3 +81,73 @@ Phase 0 still TODO before moving to Phase 1:
 **Decision point reached (verify-as-we-go).** Everything from Phase 2 on stacks on the hub, but the hub can't be runtime-verified until the migration is applied and service keys exist — see `NEEDS_YOUR_HANDS.md`. Recommended: bring the hub online and verify Phase 1 live before building Phase 2 on top of it, rather than piling up unverified code.
 
 **Resume here:** either (a) user brings the hub online (NEEDS_YOUR_HANDS Phase 1) → I script the push/pull smoke test → mark the 4 `aos-*` sync/registry milestones done → start Phase 2; or (b) continue building Phase 2 code unverified (SSP `ssp-adopt-shared-contracts` + outbox + athlete link; Olbrecht `oet-implement-sync-adapter` + readiness consumption) if the user prefers to keep coding ahead.
+
+## 2026-07-06 → 2026-07-07 — Session 6: Phase 2 built and verified + Phase 4 emitters + FormLab science pass
+
+Resumed from Session 5's decision point via option (b): build ahead of hub bring-up (user re-granted "go to town" mandate). Discovered and corrected staleness first: AthleteOS server stabilization was already done (2026-06-17 session, tsc 0 errors — flipped `aos-server-stabilization` to done), and the Desktop MasterMind CLAUDE.md snapshot was 6 weeks stale (fixed at the end of this session).
+
+**Phase 2 — Swim State Pro side (all verified: 17/17 vitest, vite build clean):**
+- Vendored contracts; `src/sync/` module: hubClient (x-service-key), readinessEnvelope adapter (ReadinessLog → ReadinessSnapshotUpsert with auditable categoryBanding), athleteLinks (hub registry resolution + athlete_links table), outbox (sync_outbox table, idempotency-stable retries, fail-silent), startEcosystemSync bootstrap; Supabase migration 20260706000000; .env.example. Enqueue wired into both readiness save paths.
+
+**Phase 2 — Olbrecht side (all verified: typecheck clean, 27/27 engine tests, build clean):**
+- Consumed contracts back (domain/enums + domain/sync re-export the vendored package — single enum identity; readiness payload schema updated to the merged shape).
+- `HubSyncAdapter` implements the SwimStateProSyncAdapter interface against hub push/pull; `SyncOutbox` with pluggable storage; `envelope-factory` for SessionPlan/Response/DerivedMetrics publishing (UI wiring pending → milestone stays in_progress).
+- **`readiness-modulation.ts` — the engineering lock's core mandate:** SSP snapshots modulate session targets via global banding + dominant-system gating (lock-spec load allocations) + anaerobic-power spacing (6d/4d) + taper precedence (≤21d). 11 dedicated tests.
+
+**Phase 4 — SentiOS emitters (SSP TS, OET TS, FormLab Python):** interface-identical, fail-silent, env-gated; required events wired at real touchpoints (session_imported, readiness_updated, push/export success/fail, heartbeats, video_uploaded, analysis_complete). Consolidation into one vendored SDK proposed (ECOSYSTEM_IMPROVEMENTS B3).
+
+**FormLab science pass (69/69 pytest, App typecheck+build clean, live HTTP verified):**
+- Equation registry v8→v9: added Reynolds, Schlichting friction, friction drag, D=k·vⁿ (2.12/2.28 by sex), PSA angle-of-attack model, hand propulsive force, true Froude propulsive efficiency, IdC, hybrid velocity projection — 20 new spec-pinned tests.
+- **Fixed real physics bugs:** simulation body-angle lever direction was inverted (raising the angle read as improvement) and the area model lacked the (BSA/2)·sinα planform term. Hydro engine v7, simulation engine v3; zero-lever continuity preserved by ratio application.
+- `/simulate` now returns a drag_decomposition block; full pipeline persists the new metrics as derived-metric rows (no DB migration needed).
+
+**Documents produced (Desktop MasterMind, for user review — NOT yet tracker milestones per user instruction):**
+- `SCIENCE_REVIEW_2026-07-07.md` — cross-system audit; headline findings: SSP is missing Module 5 recovery debt entirely; SSP normalization uses fixed step tables vs the spec's adaptive tanh; Olbrecht lock-config load allocations conflict with the Master Mind table (Race Pace and Recovery Technique dominance inverted); banding schemes diverge (4-band vs 3-band); 5 decisions requested from the user.
+- `ECOSYSTEM_IMPROVEMENTS.md` — 25 ideas in 4 tiers; top: stable-key identity de-forking, hub envelope validation, session-link endpoint, SSP type-gate, mock outputs self-identifying.
+- `APPROACH_SUGGESTIONS.md` — 9 route adjustments with no capability reduction (shared readiness engine, keys out of the browser, OlyState adopting Triathlete Pro's persistence pattern, FormLab projection split, recovery-rules package first, etc.).
+
+**Tracker:** 14 milestones updated (12 → done, 2 → in_progress with evidence). PROJECT_STATUS re-rendered.
+
+**Resume next:** (1) user reviews the three documents and the 5 science decisions; (2) hub bring-up per NEEDS_YOUR_HANDS Phase 1 → run smoke-sync → live-verify SSP push and OET pull; (3) approved review items become tracker milestones; (4) Phase 3 (FormLab movement-cost feed) is the next build phase — SSP now has the pull-capable sync layer it needs.
+
+## 2026-07-08 — Session 7: Science decisions ratified + implemented, batch quick wins
+
+User reviewed SCIENCE_REVIEW_2026-07-07.md's 5 closing questions via structured choice (not free-form back-and-forth) and approved the recommended option on all 4 that required a decision (the 5th, "Olbrecht load-allocation authority," resolved as "lock config wins"). Also approved batch execution of the improvement/suggestion docs' Tier A/B/D items and Approach S2–S9 "unless objected to" — this session executed the highest-leverage subset; the rest remain backlog per those docs.
+
+**Master Mind CLAUDE.md updated** (the constitution, not just the tracker): readiness banding is now the ratified 4-band state-based scheme (green/yellow/orange/red) ecosystem-wide, superseding the old 3-band Module 7 table; all 7 session-class load shapes corrected to match the app's `Olbrecht_Final_Engineering_Lock` config (Race Pace and Recovery Technique had inverted dominant systems in the old table — Recovery Technique's mismatch-dominant neuro weight is preserved as a separate mismatch-table fact, not conflated with load allocation).
+
+**Swim State Pro — Module 5 recovery debt, fully implemented (not shadow-mode):** new `readiness-engine/src/recovery/debt.ts` — spec-exact accumulation formula (α1=0.20 missed sleep, α2=0.15 two-a-days, α3=0.10 short spacing, β=0.25 recovery actions, 7-day half-life), documented first-pass d_s sensitivities (neuro 0.35 > muscular 0.25 > cardio 0.15, explicitly flagged as an informed prior pending Module 8 calibration, not a literature value). Wired into the decay chain (`fatigue/projection.ts`, `coupling/engine.ts`) as a backward-compatible optional parameter, and into `readiness/scoring.ts` as the Module 7 debtPenalty (0.10) on the composite. Persisted via new migration + `recoveryDebtPersistence.ts`, advanced fire-and-forget on every readiness save. 18 new tests; full suite 38/38; build clean.
+
+**FormLab — both ratified simulation upgrades:** equation registry v10 adds velocity-aware wave drag (surface ratio scales as (v/1.7)² per the spec's 50–60%-at-1.7m/s anchor, clamped) and VPM-calibrated drag coefficients (quality-gated measured active drag now replaces the population-default C_d, with `drag_source` provenance on every result). Hydrodynamic engine v8. 8 new tests; full suite 77/77.
+
+**Batch quick wins:**
+- **A2 (hub envelope validation) was already implemented** in the original Phase 1 build — corrected the ECOSYSTEM_IMPROVEMENTS.md finding, which had this wrong.
+- **A5**: AthleteOS's mocked video-analysis payload now stamps `mock: true`.
+- **Found and fixed a live production bug**: `swim-state-pro-2/src/adapters/persistence.ts` called an undefined `compactRecord` function unconditionally inside `mapReadinessLogToDatabase` — every readiness-log save carrying rhythm/context/taper data (i.e. every real `DailyCheckIn` save) would throw a `ReferenceError` at runtime. This was invisible because `vite build` never runs `tsc`. Fixed with a regression test proving the exact previously-crashing call now succeeds.
+- **B4**: built `packages/ecosystem-contracts/scripts/check-vendored.mjs`, hashes canonical source against all 3 vendor locations, wired into `npm run verify`. Ran clean on first execution.
+- **A1 reassessed, not fixed as originally scoped**: populating `externalStableKey` safely needs a real identity signal (email/DOB) neither app currently collects; a name-only key would silently *merge* wrong athletes, which is worse than today's non-merging gap. Did not fabricate a heuristic (Ecosystem Rule 8). Corrected the improvements doc to say so plainly.
+
+**Tracker:** 2 new milestones added (`ssp-module5-recovery-debt`, `fl-vpm-drag-calibration-and-wave-velocity-scaling`), both done. PROJECT_STATUS re-rendered.
+
+**Resume next:** hub bring-up is still the standing blocker for live Phase 2 verification (NEEDS_YOUR_HANDS.md Phase 1 unchanged). Remaining Tier B/D improvements and Approach S1/S3–S9 are batch-approved backlog, not yet executed — pick up in priority order next session, or on request.
+
+## 2026-07-09 → 2026-07-10 — Session 8: Phase 3 built end-to-end + backlog batch
+
+User directive: "begin next phase of work and the remaining backlog; continue to log potential improvements."
+
+**Phase 3 — FormLab → Swim State movement-cost feed, COMPLETE (both sides, all four milestones):**
+- *FormLab side* (`fl-consume-python-bindings`, `fl-publish-to-hub`): Python contract bindings vendored into the Engine (now covered by the drift check); new `formlab/ecosystem_sync.py` derives movement red flags from the Engine's OWN outputs — score bands (<40 caution, <25 warning, documented as first-pass priors), severity-scaled per-system recovery costs, 0.30 confidence gate, plus an info-severity flag for legality violations. Deterministic uuid5 IDs per (analysis, dysfunction) make re-runs dedupe at every layer. SQLite outbox (migration 003) + athlete-link resolution + batch hub push + senti export events + drain loop; wired into `run_analysis` completion, no-op unless env-configured. A BiomechReportUpsert with score/hydro summary ships alongside. 11 new tests; suite 88/88.
+- *Swim State side* (`ssp-ingest-formlab-movement-cost`): `pullEnvelopes` added to the hub client; `movementCostMapping.ts` (pure, dependency-free) maps `recoveryCostEstimate × confidence` into fatigue-state units (scale 1.0, cap 1.0/system — under half a hard session's cost, documented prior); `movementCostInbox.ts` pulls cursor-paged red flags, reverse-maps canonical→local athlete, applies each flag exactly once (unique-constraint idempotency + audit rows in `ingested_red_flags`), cost flows through `applySessionFatigueCost` so it decays like normal load. Migration 20260709000000. 7 new tests; suite 45/45; build clean. **The docs' grand-unified-flow step 1→2 (FormLab dysfunction → Swim State recovery cost) now exists in code.**
+
+**Backlog batch executed:**
+- **A3 session-link registry**: hub migration 0003 + `linkSession`/`getSessionLinks` service + `POST/GET /api/registry/sessions` (idempotent, revision-bumping, hub mints sharedObjectId); OET adapter now registers links on the hub and adopts the hub's identity, local cache as offline fallback. Hub tsc clean; OET 29/29.
+- **B1 connectivity-aware drains**: SSP worker drains on online/visibility events (jittered, rate-limited) alongside the 5-min timer, and now drains the new inbox too; OET got DOM-free `attachDrainTriggers` (injected hosts, tested).
+- **B2 backfill**: `backfillReadinessHistory()` pages full history into the outbox using each log's own UUID as the idempotency key.
+- **D6**: SSP snapshots stamp `READINESS_ENGINE_VERSION` (`ssp-readiness-engine/4.5.0-module5`) in extensions.
+- **B4 extended**: drift check now hashes the FormLab Python bindings too — 4/4 vendor locations verified.
+
+**New improvements logged (ECOSYSTEM_IMPROVEMENTS.md Batch 2, E1–E7):** per-dysfunction application cooldown (repeat-stacking guard), parked-envelope table for unlinked athletes (current inbox drops them past the cursor), per-stream pull cursors before any second inbound flow, hub-side session matching by athlete+time-window, red-flag threshold validation against real analyses, a `red_flags_derived` SentiOS event.
+
+**Tracker:** 4 Phase 3 milestones flipped to done; 3 new batch milestones added (all done). PROJECT_STATUS re-rendered.
+
+**Resume next:** hub bring-up remains the standing owner-side blocker (everything hub-facing is still verified against fakes, not a live hub). Remaining backlog: B3/S6 SentiOS SDK consolidation, B5 coverage scoreboard, B6 e2e harness, A4 type burn-down (~175), S1 shared readiness engine, S2 keys out of browser, S3 OlyState persistence, S4 FormLab store split, S5 recovery-rules package, E1–E6 refinements, D-tier hygiene.

@@ -1,6 +1,6 @@
 # Project Status Dashboard
 
-Generated from projects.json updated 2026-06-14.
+Generated from projects.json updated 2026-07-10.
 
 Manual milestone records are the source of truth. Evidence scans and verification commands support the records but do not automatically mark work complete.
 
@@ -11,10 +11,10 @@ Manual milestone records are the source of truth. Evidence scans and verificatio
 | Triathlete Pro | Triathlon adaptation of the Olbrecht-style energy tracking workflow with React, local Node API, SQLite persistence, and shared calculation logic. | 2/9 done; 6 todo; 1 confirm; 0 blocked; 0 deferred | Define required source list and acceptance criteria for moving from estimated-default to production coaching use. | None recorded |
 | OlyState Pro | Coach-facing Olympic weightlifting readiness dashboard with a manual-first model and normalized observations for future sensor support. | 0/9 done; 4 todo; 4 confirm; 0 blocked; 1 deferred | Run all three verification commands and store the results. | None recorded |
 | SentiOS | Local monitoring and verification layer for AthleteOS-integrated modules; reports signal presence and routing integrity without interpreting athlete biology. | 0/7 done; 2 todo; 5 confirm; 0 blocked; 0 deferred | Run verification commands and store results in check-in history. | None recorded |
-| AthleteOS | Central athlete intelligence platform and ecosystem hub for dashboards, alerts, long-term timelines, and cross-system orchestration. | 1/15 done; 9 todo; 0 confirm; 0 blocked; 1 deferred | Verify end-to-end after the hub is online (see project-progress/NEEDS_YOUR_HANDS.md Phase 1), then mark done. | None recorded |
-| FormLab | Biomechanics and technical execution system for swim and lift analysis using force, motion, video, and physics-oriented movement data. | 1/12 done; 8 todo; 0 confirm; 1 blocked; 1 deferred | Run App + Engine end-to-end to confirm the /simulate flow, then design the full /analysis/run contract. | Align App and Engine schemas and choose one data store strategy |
-| Swim State Pro | Readiness, rhythm, taper, fatigue, and performance prediction layer for swim training decisions. | 5/15 done; 9 todo; 0 confirm; 0 blocked; 1 deferred | Create .env.example and README deployment section, then decide Vercel or Netlify config. | None recorded |
-| Olbrecht Energy Tracker | Metabolic energy-system planning and mismatch detection system for swim training based on Olbrecht-style physiological logic. | 2/15 done; 11 todo; 2 confirm; 0 blocked; 0 deferred | Verify current auth/role model and define enforcement points. | None recorded |
+| AthleteOS | Central athlete intelligence platform and ecosystem hub for dashboards, alerts, long-term timelines, and cross-system orchestration. | 3/16 done; 8 todo; 0 confirm; 0 blocked; 1 deferred | Verify end-to-end after the hub is online (see project-progress/NEEDS_YOUR_HANDS.md Phase 1), then mark done. | None recorded |
+| FormLab | Biomechanics and technical execution system for swim and lift analysis using force, motion, video, and physics-oriented movement data. | 8/13 done; 3 todo; 0 confirm; 1 blocked; 1 deferred | Choose Engine SQLite read endpoints or Supabase serialization as the single integration path. | Align App and Engine schemas and choose one data store strategy |
+| Swim State Pro | Readiness, rhythm, taper, fatigue, and performance prediction layer for swim training decisions. | 12/17 done; 3 todo; 0 confirm; 0 blocked; 1 deferred | Write README deployment section and choose Vercel or Netlify config. | None recorded |
+| Olbrecht Energy Tracker | Metabolic energy-system planning and mismatch detection system for swim training based on Olbrecht-style physiological logic. | 7/16 done; 6 todo; 2 confirm; 0 blocked; 0 deferred | Wire createSessionPlan/Response/DerivedMetrics envelope enqueue into the session save flows once the sessions feature UI lands. | None recorded |
 | Ecosystem Integration | Cross-cutting unification layer: shared contracts, canonical athlete identity, hub-and-spoke transport, and flow specifications that let all systems communicate while remaining standalone. | 6/6 done; 0 todo; 0 confirm; 0 blocked; 0 deferred | No open milestone recorded. | None recorded |
 
 ## Completed Since Last Check-In
@@ -27,11 +27,32 @@ Initial baseline only; no post-baseline completions are recorded yet.
 - 2026-05-29: Swim State Pro - Rename boltStorage.ts to athleteDataService.ts and update imports
 - 2026-05-29: Swim State Pro - Remove empty readiness-engine utils export surface
 - 2026-06-12: Ecosystem Integration - Ratify hub-and-spoke transport through AthleteOS with local outbox fallback
+- 2026-06-13: FormLab - Define and emit MovementRedFlag/BiomechReport envelopes with a recovery-cost estimate
 - 2026-06-13: Ecosystem Integration - Create shared ecosystem contracts package (envelopes, payload schemas, identity links) as TypeScript + JSON Schema
 - 2026-06-13: Ecosystem Integration - Define canonical athlete identity issuance and per-app link mapping
 - 2026-06-13: Ecosystem Integration - Document canonical data flow direction, order, and cadence for every exchange
 - 2026-06-13: Ecosystem Integration - Define schema versioning and compatibility policy for envelopes
 - 2026-06-13: Ecosystem Integration - Generate Python bindings from JSON Schemas for the FormLab Engine
+- 2026-06-17: AthleteOS - Stabilize server and resolve critical runtime blockers
+- 2026-07-07: FormLab - Complete foundation fixes: requirements, env safety, FastAPI import, braking force bug, package name
+- 2026-07-07: FormLab - Connect App to Engine with a real API contract
+- 2026-07-07: FormLab - Emit FormLab required events to SentiOS
+- 2026-07-07: Swim State Pro - Adopt the shared contracts package and map ReadinessLog to the ReadinessSnapshot envelope
+- 2026-07-07: Swim State Pro - Store canonical athlete UUID mapping alongside local athlete records
+- 2026-07-07: Swim State Pro - Publish daily readiness snapshots and system flags to the hub via outbox push
+- 2026-07-07: Swim State Pro - Emit SwimState required events to SentiOS
+- 2026-07-07: Olbrecht Energy Tracker - Generalize the Olbrecht sync domain (envelopes, payload types, SourceApp) into the shared contracts package
+- 2026-07-07: Olbrecht Energy Tracker - Implement the SwimStateProSyncAdapter against hub push/pull
+- 2026-07-07: Olbrecht Energy Tracker - Consume Swim State Pro readiness snapshots to modulate session targets per the engineering lock
+- 2026-07-07: Olbrecht Energy Tracker - Emit OlbrechtEngine required events to SentiOS
+- 2026-07-08: FormLab - VPM-calibrated drag coefficient feedback + velocity-aware wave drag
+- 2026-07-08: Swim State Pro - Implement Module 5 recovery debt (D(t) accumulation, M_debt decay modifier, Module 7 composite penalty)
+- 2026-07-10: AthleteOS - Session-link registry endpoints (SharedSessionLink)
+- 2026-07-10: FormLab - Consume generated Python schema bindings in the Engine
+- 2026-07-10: FormLab - Push biomech reports and red flags to the AthleteOS sync API
+- 2026-07-10: Swim State Pro - Ingest FormLab movement-dysfunction payloads as recovery-cost inputs to the fatigue model
+- 2026-07-10: Swim State Pro - Connectivity-aware drains, historical backfill, engine version stamps (B1/B2/D6)
+- 2026-07-10: Olbrecht Energy Tracker - Real hub linkSession + DOM-free connectivity drain triggers
 
 ## Project Details
 
@@ -105,12 +126,13 @@ Open Next Actions:
 
 Confirmed or Source-Explicit Done:
 - Define AthleteOS as central ecosystem hub [done].
+- Stabilize server and resolve critical runtime blockers (2026-06-17) [done].
+- Session-link registry endpoints (SharedSessionLink) (2026-07-10) [done].
 
 Needs Confirmation:
 - None recorded
 
 Open Next Actions:
-- Stabilize server and resolve critical runtime blockers [todo].  Next: Convert remaining raw-SQL query() callers to the Supabase client (or restore a real pg query helper) and fix jwt sign typing, until npm run build passes. Does not block dev-mode hub verification.
 - Establish real identity, AuthProvider, login, route guards, and role source of truth [todo].  Next: Inspect current auth implementation and define exact acceptance criteria for Phase 1.
 - Choose one data architecture boundary [todo].  Next: Make and record the boundary decision before building more end-to-end features.
 - Build first end-to-end backend/frontend feature [todo].  Next: Pick notifications or file uploads, then use it to validate token flow, CORS, errors, and service boundaries.
@@ -118,6 +140,7 @@ Open Next Actions:
 - Integrate TritonWear data into progression, readiness, and reports [todo].  Next: Verify current import pipeline and map TritonWear records to dashboard/report surfaces.
 - Security, testing, DevOps, monitoring, and backup hardening [todo].  Next: Track hardening items after MVP functionality is stabilized, but address credential rotation immediately if still relevant.
 - Add machine-client authentication for app-to-hub sync calls [in_progress].  Next: Verify end-to-end after the hub is online (see project-progress/NEEDS_YOUR_HANDS.md Phase 1), then mark done.
+- Issue canonical athlete UUIDs and serve the athlete link registry [in_progress].  Next: Verify end-to-end after the hub is online (see project-progress/NEEDS_YOUR_HANDS.md Phase 1), then mark done.
 
 ### FormLab
 
@@ -127,19 +150,20 @@ Open Next Actions:
 
 Confirmed or Source-Explicit Done:
 - FormLab Engine and FormLab App exist as separate components [done].
+- Complete foundation fixes: requirements, env safety, FastAPI import, braking force bug, package name (2026-07-07) [done].
+- Connect App to Engine with a real API contract (2026-07-07) [done].
+- Define and emit MovementRedFlag/BiomechReport envelopes with a recovery-cost estimate (2026-06-13) [done].
+- Consume generated Python schema bindings in the Engine (2026-07-10) [done].
+- Push biomech reports and red flags to the AthleteOS sync API (2026-07-10) [done].
 
 Needs Confirmation:
 - None recorded
 
 Open Next Actions:
-- Complete foundation fixes: requirements, env safety, FastAPI import, braking force bug, package name [todo].  Next: Verify which Phase 1 items are already fixed and update statuses item-by-item.
-- Connect App to Engine with a real API contract [in_progress].  Next: Run App + Engine end-to-end to confirm the /simulate flow, then design the full /analysis/run contract.
 - Align App and Engine schemas and choose one data store strategy [blocked].  Next: Choose Engine SQLite read endpoints or Supabase serialization as the single integration path.
 - Surface joint angles, torques, confidence, legality notes, recommendations, and race sections in UI [todo].  Next: Implement after the API contract and schema alignment are stable.
 - Add authentication, athlete profiles, scoped history, pagination, and filtering [todo].  Next: Define ownership model and Supabase/Auth boundary after data-store decision.
 - Clean up Engine internals and migration strategy [todo].  Next: Refactor after minimum viable App/Engine integration is proven.
-- Define and emit MovementRedFlag/BiomechReport envelopes with a recovery-cost estimate [todo].  Next: Specify payload fields with Swim State Pro (dysfunction type, severity, recovery-cost estimate, confidence), add them to the contracts package, and emit after analysis.
-- Consume generated Python schema bindings in the Engine [todo].  Next: Add the contracts package codegen output to Engine requirements and validate envelopes at boundaries.
 
 ### Swim State Pro
 
@@ -153,19 +177,16 @@ Confirmed or Source-Explicit Done:
 - Remove dead import aliases in src/App.tsx (2026-05-29) [done].
 - Rename boltStorage.ts to athleteDataService.ts and update imports (2026-05-29) [done].
 - Remove empty readiness-engine utils export surface (2026-05-29) [done].
+- Adopt the shared contracts package and map ReadinessLog to the ReadinessSnapshot envelope (2026-07-07) [done].
 
 Needs Confirmation:
 - None recorded
 
 Open Next Actions:
-- Create env/deployment setup [todo].  Next: Create .env.example and README deployment section, then decide Vercel or Netlify config.
+- Create env/deployment setup [in_progress].  Next: Write README deployment section and choose Vercel or Netlify config.
 - Write regression tests for core calculation pipeline [todo].  Next: Define fixture athlete states and expected readiness/prediction outputs.
 - Add coach realtime updates and decide coach write permissions [todo].  Next: Choose coach notes/annotations vs read-only, then implement realtime subscriptions.
 - Add PWA manifest and icons for mobile installability [todo].  Next: Add public manifest and icons, then verify installability.
-- Adopt the shared contracts package and map ReadinessLog to the ReadinessSnapshot envelope [todo].  Next: Add an adapter in the readiness-engine contracts layer translating ReadinessLog to ReadinessSnapshotUpsert.
-- Store canonical athlete UUID mapping alongside local athlete records [todo].  Next: Add athlete link storage and a link flow against the AthleteOS registry.
-- Publish daily readiness snapshots and system flags to the hub via outbox push [todo].  Next: Implement an outbox table and push worker with idempotency keys against POST /api/sync/push.
-- Ingest FormLab movement-dysfunction payloads as recovery-cost inputs to the fatigue model [todo].  Next: Define how MovementRedFlag maps to fatigue/recovery inputs in the readiness engine, then consume via hub pull.
 
 ### Olbrecht Energy Tracker
 
@@ -176,6 +197,10 @@ Open Next Actions:
 Confirmed or Source-Explicit Done:
 - Finalize engineering lock specification [done].
 - Finalize MVP feature list [done].
+- Generalize the Olbrecht sync domain (envelopes, payload types, SourceApp) into the shared contracts package (2026-07-07) [done].
+- Implement the SwimStateProSyncAdapter against hub push/pull (2026-07-07) [done].
+- Consume Swim State Pro readiness snapshots to modulate session targets per the engineering lock (2026-07-07) [done].
+- Emit OlbrechtEngine required events to SentiOS (2026-07-07) [done].
 
 Needs Confirmation:
 - Implement deterministic session classification and probability distribution [needs_confirmation].  Next: Inspect active engine code and tests for achievedClassTop, achievedClassDistribution, classifierTemperature, and calibrationMode.
@@ -188,8 +213,7 @@ Open Next Actions:
 - Support structured export/download, external AI analysis upload, and coach notification [todo].  Next: Define export format and upload/notification workflow.
 - Sync cleanly with Swim State Pro through shared athlete identity, session timing, readiness exchange, and derived output schemas [todo].  Next: Execute via the Phase 2 milestones in INTEGRATION_PLAN.md: oet-donate-sync-domain, oet-implement-sync-adapter, oet-consume-readiness-modulation, oet-publish-session-envelopes.
 - Record first frontend, engine, build, and server verification baseline [todo].  Next: Run verification commands and store results in check-in history.
-- Generalize the Olbrecht sync domain (envelopes, payload types, SourceApp) into the shared contracts package [todo].  Next: Extract domain/sync types, extend SourceApp to all ecosystem apps, and consume the shared package back.
-- Implement the SwimStateProSyncAdapter against hub push/pull [todo].  Next: Build the HTTP adapter with outbox queue, idempotency, and conflict handling.
+- Publish SessionPlan, SessionResponse, and DerivedMetrics envelopes to the hub [in_progress].  Next: Wire createSessionPlan/Response/DerivedMetrics envelope enqueue into the session save flows once the sessions feature UI lands.
 
 ### Ecosystem Integration
 
