@@ -1,0 +1,13 @@
+{
+  "name": "@ecosystem/design-tokens",
+  "version": "0.1.0",
+  "description": "The shared visual language for the athlete ecosystem: color (dark glass signature + light variant), type, spacing, radii, elevation/glow, blur, motion, and z-layers. TypeScript is the source of truth; tokens.css is generated from it. Vendored into apps like the contracts package (ratified Control Center decision 4, 2026-07-11).",
+  "private": true,
+  "type": "module",
+  "main": "./src/tokens.ts",
+  "scripts": {
+    "build": "node --experimental-strip-types scripts/generate-css.mjs",
+    "test": "node --experimental-strip-types test/tokens.test.mjs",
+    "verify": "node --experimental-strip-types test/tokens.test.mjs"
+  }
+}
