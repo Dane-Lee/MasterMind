@@ -1,6 +1,6 @@
 # Project Status Dashboard
 
-Generated from projects.json updated 2026-07-10.
+Generated from projects.json updated 2026-07-11.
 
 Manual milestone records are the source of truth. Evidence scans and verification commands support the records but do not automatically mark work complete.
 
@@ -8,12 +8,12 @@ Manual milestone records are the source of truth. Evidence scans and verificatio
 
 | Project | Ecosystem Role | Status Mix | Current Focus | Blockers |
 |---|---|---|---|---|
-| Triathlete Pro | Triathlon adaptation of the Olbrecht-style energy tracking workflow with React, local Node API, SQLite persistence, and shared calculation logic. | 2/9 done; 6 todo; 1 confirm; 0 blocked; 0 deferred | Define required source list and acceptance criteria for moving from estimated-default to production coaching use. | None recorded |
-| OlyState Pro | Coach-facing Olympic weightlifting readiness dashboard with a manual-first model and normalized observations for future sensor support. | 0/9 done; 4 todo; 4 confirm; 0 blocked; 1 deferred | Run all three verification commands and store the results. | None recorded |
+| Triathlete Pro | Triathlon adaptation of the Olbrecht-style energy tracking workflow with React, local Node API, SQLite persistence, and shared calculation logic. | 5/9 done; 3 todo; 1 confirm; 0 blocked; 0 deferred | Define required source list and acceptance criteria for moving from estimated-default to production coaching use. | None recorded |
+| OlyState Pro | Coach-facing Olympic weightlifting readiness dashboard with a manual-first model and normalized observations for future sensor support. | 3/9 done; 1 todo; 4 confirm; 0 blocked; 1 deferred | Run all three verification commands and store the results. | None recorded |
 | SentiOS | Local monitoring and verification layer for AthleteOS-integrated modules; reports signal presence and routing integrity without interpreting athlete biology. | 0/7 done; 2 todo; 5 confirm; 0 blocked; 0 deferred | Run verification commands and store results in check-in history. | None recorded |
-| AthleteOS | Central athlete intelligence platform and ecosystem hub for dashboards, alerts, long-term timelines, and cross-system orchestration. | 3/16 done; 8 todo; 0 confirm; 0 blocked; 1 deferred | Verify end-to-end after the hub is online (see project-progress/NEEDS_YOUR_HANDS.md Phase 1), then mark done. | None recorded |
+| AthleteOS | Central athlete intelligence platform and ecosystem hub for dashboards, alerts, long-term timelines, and cross-system orchestration. | 4/17 done; 7 todo; 0 confirm; 0 blocked; 1 deferred | Verify end-to-end after the hub is online (see project-progress/NEEDS_YOUR_HANDS.md Phase 1), then mark done. | None recorded |
 | FormLab | Biomechanics and technical execution system for swim and lift analysis using force, motion, video, and physics-oriented movement data. | 8/13 done; 3 todo; 0 confirm; 1 blocked; 1 deferred | Choose Engine SQLite read endpoints or Supabase serialization as the single integration path. | Align App and Engine schemas and choose one data store strategy |
-| Swim State Pro | Readiness, rhythm, taper, fatigue, and performance prediction layer for swim training decisions. | 12/17 done; 3 todo; 0 confirm; 0 blocked; 1 deferred | Write README deployment section and choose Vercel or Netlify config. | None recorded |
+| Swim State Pro | Readiness, rhythm, taper, fatigue, and performance prediction layer for swim training decisions. | 13/18 done; 3 todo; 0 confirm; 0 blocked; 1 deferred | Write README deployment section and choose Vercel or Netlify config. | None recorded |
 | Olbrecht Energy Tracker | Metabolic energy-system planning and mismatch detection system for swim training based on Olbrecht-style physiological logic. | 7/16 done; 6 todo; 2 confirm; 0 blocked; 0 deferred | Wire createSessionPlan/Response/DerivedMetrics envelope enqueue into the session save flows once the sessions feature UI lands. | None recorded |
 | Ecosystem Integration | Cross-cutting unification layer: shared contracts, canonical athlete identity, hub-and-spoke transport, and flow specifications that let all systems communicate while remaining standalone. | 6/6 done; 0 todo; 0 confirm; 0 blocked; 0 deferred | No open milestone recorded. | None recorded |
 
@@ -52,7 +52,15 @@ Initial baseline only; no post-baseline completions are recorded yet.
 - 2026-07-10: FormLab - Push biomech reports and red flags to the AthleteOS sync API
 - 2026-07-10: Swim State Pro - Ingest FormLab movement-dysfunction payloads as recovery-cost inputs to the fatigue model
 - 2026-07-10: Swim State Pro - Connectivity-aware drains, historical backfill, engine version stamps (B1/B2/D6)
+- 2026-07-10: Swim State Pro - Phase 3 inbox hardening: cooldown, parked envelopes, per-stream cursors (E1-E3)
 - 2026-07-10: Olbrecht Energy Tracker - Real hub linkSession + DOM-free connectivity drain triggers
+- 2026-07-11: Triathlete Pro - Adopt shared contracts and map domain ReadinessSnapshot/LoadMetric types to ecosystem envelopes
+- 2026-07-11: Triathlete Pro - Publish triathlon readiness and load envelopes to AthleteOS
+- 2026-07-11: Triathlete Pro - Emit TriathleteTracker required events to SentiOS
+- 2026-07-11: OlyState Pro - Add exportable persistence beyond localStorage as the integration precondition
+- 2026-07-11: OlyState Pro - Map normalized observations to ecosystem envelopes, including FormLab video observations
+- 2026-07-11: OlyState Pro - Emit OlyState required events to SentiOS
+- 2026-07-11: AthleteOS - Hub intelligence: readiness-source precedence resolution + first alert rule (CNS overreach)
 
 ## Project Details
 
@@ -65,6 +73,9 @@ Initial baseline only; no post-baseline completions are recorded yet.
 Confirmed or Source-Explicit Done:
 - Shared calculation module wired into backend recomputation and persistence [done].
 - Calculation outputs include confidence levels, warnings, coefficient versions, and traces [done].
+- Adopt shared contracts and map domain ReadinessSnapshot/LoadMetric types to ecosystem envelopes (2026-07-11) [done].
+- Publish triathlon readiness and load envelopes to AthleteOS (2026-07-11) [done].
+- Emit TriathleteTracker required events to SentiOS (2026-07-11) [done].
 
 Needs Confirmation:
 - Model and database validation coverage exists for current provisional model [needs_confirmation].  Next: Run npm run verify and confirm all listed checks are represented in the current test suite.
@@ -73,9 +84,6 @@ Open Next Actions:
 - Complete literature review and production calibration for formulas [todo].  Next: Define required source list and acceptance criteria for moving from estimated-default to production coaching use.
 - Review and activate athlete-specific profile values and coefficients [todo].  Next: Define calibration workflow and criteria for partially-calibrated and fully-calibrated outputs.
 - Record first baseline verification result [todo].  Next: Run npm run verify and store result in check-in history.
-- Adopt shared contracts and map domain ReadinessSnapshot/LoadMetric types to ecosystem envelopes [todo].  Next: Add a translation layer from src/shared/domain.ts types to ReadinessSnapshotUpsert and DerivedMetricsUpsert.
-- Publish triathlon readiness and load envelopes to AthleteOS [todo].  Next: Add an outbox and push path from the local Node API once hub ingestion exists.
-- Emit TriathleteTracker required events to SentiOS [todo].  Next: Wire SentiClient into API startup and calculation persistence paths.
 
 ### OlyState Pro
 
@@ -84,7 +92,9 @@ Open Next Actions:
 - Verification commands: `npm test`, `npm run build`, `npm run test:e2e`
 
 Confirmed or Source-Explicit Done:
-- None recorded
+- Add exportable persistence beyond localStorage as the integration precondition (2026-07-11) [done].
+- Map normalized observations to ecosystem envelopes, including FormLab video observations (2026-07-11) [done].
+- Emit OlyState required events to SentiOS (2026-07-11) [done].
 
 Needs Confirmation:
 - Manual-first Olympic weightlifting readiness dashboard [needs_confirmation].  Next: Run the app or e2e flow and confirm the dashboard workflow is available.
@@ -94,9 +104,6 @@ Needs Confirmation:
 
 Open Next Actions:
 - Record first baseline test, build, and e2e results [todo].  Next: Run all three verification commands and store the results.
-- Add exportable persistence beyond localStorage as the integration precondition [todo].  Next: Choose file export/import or a lightweight backend; required before any sync work.
-- Map normalized observations to ecosystem envelopes, including FormLab video observations [todo].  Next: Define the ObservationUpsert payload in the contracts package and an import path for FormLab-derived observations.
-- Emit OlyState required events to SentiOS [todo].  Next: Wire SentiClient (or direct HTTP) at session save and readiness calculation points.
 
 ### SentiOS
 
@@ -128,6 +135,7 @@ Confirmed or Source-Explicit Done:
 - Define AthleteOS as central ecosystem hub [done].
 - Stabilize server and resolve critical runtime blockers (2026-06-17) [done].
 - Session-link registry endpoints (SharedSessionLink) (2026-07-10) [done].
+- Hub intelligence: readiness-source precedence resolution + first alert rule (CNS overreach) (2026-07-11) [done].
 
 Needs Confirmation:
 - None recorded

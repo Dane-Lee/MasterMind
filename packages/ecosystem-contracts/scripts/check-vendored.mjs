@@ -25,6 +25,8 @@ const VENDOR_LOCATIONS = [
   String.raw`C:\Users\dlee5\OneDrive\Desktop\AthleteOS\project-app-1\project\server\src\ecosystem-contracts`,
   String.raw`C:\Users\dlee5\OneDrive\Desktop\Swim State Pro\swim-state-pro-2\src\ecosystem-contracts`,
   String.raw`C:\Users\dlee5\OneDrive\Desktop\Olbrecht Energy Tracker\app\project\src\ecosystem-contracts`,
+  String.raw`C:\Users\dlee5\OneDrive\Documents\Triathlete Pro\src\ecosystem-contracts`,
+  String.raw`C:\Users\dlee5\OneDrive\Documents\OlyState Pro\src\ecosystem-contracts`,
 ];
 
 // Python bindings vendored as a single file (FormLab Engine). Compared

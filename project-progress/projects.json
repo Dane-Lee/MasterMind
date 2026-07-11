@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "createdAt": "2026-06-03",
-  "updatedAt": "2026-07-10",
+  "updatedAt": "2026-07-11",
   "statusValues": [
     "todo",
     "in_progress",
@@ -116,34 +116,34 @@
         {
           "id": "ttp-adopt-shared-contracts",
           "title": "Adopt shared contracts and map domain ReadinessSnapshot/LoadMetric types to ecosystem envelopes",
-          "status": "todo",
-          "completedAt": null,
+          "status": "done",
+          "completedAt": "2026-07-11",
           "source": "INTEGRATION_PLAN.md (2026-06-12)",
-          "evidence": "Code inspection 2026-06-12: src/shared/domain.ts defines ReadinessSnapshot, LoadMetric, CalibrationTest, CoefficientSet with confidence levels and traces; no references to other systems exist.",
+          "evidence": "Contracts vendored to src/ecosystem-contracts (registered in check-vendored.mjs); src/shared/ecosystemEnvelope.ts maps ReadinessSnapshot -> ReadinessSnapshotUpsert with documented discipline->category banding (ready/caution/overload -> green/yellow/red mirrored per system; native per-discipline detail + coefficient version in extensions; confidence-level mapping). 6 adapter tests.",
           "blocker": null,
-          "nextAction": "Add a translation layer from src/shared/domain.ts types to ReadinessSnapshotUpsert and DerivedMetricsUpsert.",
+          "nextAction": null,
           "notes": null
         },
         {
           "id": "ttp-publish-to-hub",
           "title": "Publish triathlon readiness and load envelopes to AthleteOS",
-          "status": "todo",
-          "completedAt": null,
+          "status": "done",
+          "completedAt": "2026-07-11",
           "source": "INTEGRATION_PLAN.md (2026-06-12)",
-          "evidence": null,
+          "evidence": "server/ecosystemSync.ts: SQLite outbox (snapshot id = idempotency key), canonical athlete link resolution, batch push to POST /api/sync/push, interval + post-calculate drains — all SERVER-SIDE so the service key never reaches the browser (S2 by construction). Wired into POST /readiness/calculate. Full verify gate green (audit + typecheck + lint + 17/17 + build). F1 logged: move hook into calculateAndStoreReadiness for lazy-compute coverage.",
           "blocker": null,
-          "nextAction": "Add an outbox and push path from the local Node API once hub ingestion exists.",
+          "nextAction": "F1: publish from calculateAndStoreReadiness itself so GET /readiness lazy computes also publish.",
           "notes": null
         },
         {
           "id": "ttp-sentios-signals",
           "title": "Emit TriathleteTracker required events to SentiOS",
-          "status": "todo",
-          "completedAt": null,
+          "status": "done",
+          "completedAt": "2026-07-11",
           "source": "INTEGRATION_PLAN.md (2026-06-12)",
-          "evidence": null,
+          "evidence": "EcosystemSync.emitSenti (module TriathleteTracker): readiness_updated + session_imported at routes, athlete_os_export_success/fail on drain, triathlete_tracker_heartbeat 45s. Fail-silent; disabled without SENTIOS_API_KEY.",
           "blocker": null,
-          "nextAction": "Wire SentiClient into API startup and calculation persistence paths.",
+          "nextAction": null,
           "notes": null
         }
       ],
@@ -276,34 +276,34 @@
         {
           "id": "osp-exportable-persistence",
           "title": "Add exportable persistence beyond localStorage as the integration precondition",
-          "status": "todo",
-          "completedAt": null,
+          "status": "done",
+          "completedAt": "2026-07-11",
           "source": "INTEGRATION_PLAN.md (2026-06-12)",
-          "evidence": "Code inspection 2026-06-12: storage.ts persists the whole dataset to a single localStorage key with no export path.",
+          "evidence": "Local API (node:http + node:sqlite, Triathlete pattern per APPROACH_SUGGESTIONS S3): GET/PUT /dataset with bounded snapshot history at server/; app dual-mode persistence (hydrates from API when VITE_OLYSTATE_API_URL set, localStorage always-on fallback — standalone rule intact). verify script added; typecheck:server + 16/16 tests + build green. F3 logged: revision counter before multi-device use.",
           "blocker": null,
-          "nextAction": "Choose file export/import or a lightweight backend; required before any sync work.",
+          "nextAction": null,
           "notes": null
         },
         {
           "id": "osp-observation-envelopes",
           "title": "Map normalized observations to ecosystem envelopes, including FormLab video observations",
-          "status": "todo",
-          "completedAt": null,
+          "status": "done",
+          "completedAt": "2026-07-11",
           "source": "INTEGRATION_PLAN.md (2026-06-12)",
-          "evidence": "Code inspection 2026-06-12: sensorAdapters.ts already defines a video_formlab observation source type.",
+          "evidence": "src/domain/ecosystemEnvelope.ts: Observation -> ObservationUpsert near-1:1 (sport=lift, metric-keyed values, confidence clamp, video_formlab source preserved); athlete resolved via session linkage; observation id = idempotency key so dataset re-saves never duplicate. Server enqueues on PUT /dataset and drains to the hub. 6 new domain tests. F2 logged: direct athleteId for session-less observations. FormLab-observation INGESTION (video_formlab inbound) remains future work.",
           "blocker": null,
-          "nextAction": "Define the ObservationUpsert payload in the contracts package and an import path for FormLab-derived observations.",
+          "nextAction": "Inbound path: pull FormLab biomech observations for lifters once FormLab lift analyses exist.",
           "notes": null
         },
         {
           "id": "osp-sentios-signals",
           "title": "Emit OlyState required events to SentiOS",
-          "status": "todo",
-          "completedAt": null,
+          "status": "done",
+          "completedAt": "2026-07-11",
           "source": "INTEGRATION_PLAN.md (2026-06-12)",
-          "evidence": null,
+          "evidence": "Server emits module OlyState signals: olystate_heartbeat 45s, session_imported on dataset save, athlete_os_push_success/fail on drain. Fail-silent, env-gated.",
           "blocker": null,
-          "nextAction": "Wire SentiClient (or direct HTTP) at session save and readiness calculation points.",
+          "nextAction": null,
           "notes": null
         }
       ],
@@ -666,12 +666,12 @@
         {
           "id": "aos-replace-mock-integration-routes",
           "title": "Replace mock tritonwear/biomechanics/readiness routes with real queries over ingested data",
-          "status": "todo",
+          "status": "in_progress",
           "completedAt": null,
           "source": "INTEGRATION_PLAN.md (2026-06-12)",
-          "evidence": null,
+          "evidence": "Projection-backed intelligence route added 2026-07-11: GET /api/ecosystem/athletes/:id/summary (readiness history + precedence resolution + red flags + alerts) over readiness_snapshots/movement_red_flags. The legacy mock tritonwear/biomechanics routes still exist for the demo UI and are unchanged.",
           "blocker": null,
-          "nextAction": "Swap mockData routes for projection-table queries once Phase 2-3 feeds land.",
+          "nextAction": "Point the AthleteOS frontend at the ecosystem summary endpoint and retire/flag the mock routes.",
           "notes": "Depends on aos-sync-ingestion-api and live feeds."
         },
         {
@@ -694,6 +694,17 @@
           "evidence": "Migration 0003_session_links.sql (unique per source app+session+type); RegistryService.linkSession (idempotent, revision-bumping, hub mints sharedObjectId when omitted) + getSessionLinks; POST/GET /api/registry/sessions behind service auth. Server tsc --noEmit clean.",
           "blocker": null,
           "nextAction": "E4: optional athlete+time-window matching when sharedObjectId is omitted (needs additive sessionTimestamp on the request).",
+          "notes": null
+        },
+        {
+          "id": "aos-hub-intelligence",
+          "title": "Hub intelligence: readiness-source precedence resolution + first alert rule (CNS overreach)",
+          "status": "done",
+          "completedAt": "2026-07-11",
+          "source": "INTEGRATION_PLAN.md Phase 6; ECOSYSTEM_IMPROVEMENTS C4/C5 (batch-approved)",
+          "evidence": "services/intelligenceService.ts: pure resolveReadinessSource (fresh spoke within 48h authoritative, hub engine otherwise, provenance on every answer) + pure evaluateCnsOverreachAlert (suppressed neuro + recent warning/critical red flags; critical on global red + 2 flags; Olbrecht load-spike condition documented as extension slot C). scripts/test-intelligence.ts 9/9 fixture tests; server tsc clean. Committed 2a88fd3.",
+          "blocker": null,
+          "nextAction": "Condition C (Olbrecht anaerobic load spike) once SessionResponse/DerivedMetrics envelopes flow; ?view=panel projection for the Control Center (F5).",
           "notes": null
         }
       ],
@@ -1173,6 +1184,17 @@
           "completedAt": "2026-07-10",
           "source": "ECOSYSTEM_IMPROVEMENTS.md B1/B2/D6 (batch-approved 2026-07-08)",
           "evidence": "Sync worker drains on online/visibility events (jittered, 30s min gap) alongside the 5-min timer; backfill.ts enqueues full readiness history with log-UUID idempotency keys; outbound snapshots stamp READINESS_ENGINE_VERSION (ssp-readiness-engine/4.5.0-module5) in extensions. Suite 45/45, build clean.",
+          "blocker": null,
+          "nextAction": null,
+          "notes": null
+        },
+        {
+          "id": "ssp-phase3-refinements",
+          "title": "Phase 3 inbox hardening: cooldown, parked envelopes, per-stream cursors (E1-E3)",
+          "status": "done",
+          "completedAt": "2026-07-10",
+          "source": "ECOSYSTEM_IMPROVEMENTS E1-E3 (owner-approved order 2026-07-10)",
+          "evidence": "72h per-(athlete,dysfunction) application cooldown (audit rows still recorded at zero cost); parked_envelopes table + retry for red flags whose athlete is not yet linked (no longer dropped past the cursor); sync_pull_state keyed by (user_id, stream). Migration 20260710000000; suite 46/46; build clean. Committed d283bf4.",
           "blocker": null,
           "nextAction": null,
           "notes": null

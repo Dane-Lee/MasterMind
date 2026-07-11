@@ -151,3 +151,23 @@ User directive: "begin next phase of work and the remaining backlog; continue to
 **Tracker:** 4 Phase 3 milestones flipped to done; 3 new batch milestones added (all done). PROJECT_STATUS re-rendered.
 
 **Resume next:** hub bring-up remains the standing owner-side blocker (everything hub-facing is still verified against fakes, not a live hub). Remaining backlog: B3/S6 SentiOS SDK consolidation, B5 coverage scoreboard, B6 e2e harness, A4 type burn-down (~175), S1 shared readiness engine, S2 keys out of browser, S3 OlyState persistence, S4 FormLab store split, S5 recovery-rules package, E1–E6 refinements, D-tier hygiene.
+
+## 2026-07-10 → 2026-07-11 — Session 9: E1–E3 + Phase 5 (both spokes) + Phase 6, per-repo commits
+
+Owner approved the recommended order (E-refinements → Phase 5 → Phase 6) and asked for commits along the way + continued improvement logging. Mid-session the owner also requested (a) an ecosystem-wide UX/visual upgrade TODO and (b) a design for an installed/connected/flow-visualization surface — delivered as `Desktop\MasterMind\ECOSYSTEM_CONTROL_CENTER_PROPOSAL.md` (vendorable panel, constellation view over hub+SentiOS data, per-flow three-state toggles; 4 decisions requested).
+
+**E1–E3 (SSP inbox hardening, committed d283bf4):** 72h per-dysfunction cooldown (audit rows still recorded, zero cost), parked envelopes + retry for unlinked athletes, per-stream pull cursors. 46/46, build clean.
+
+**Phase 5a Triathlete (committed 623b6fc):** contracts vendored (+drift-check registration); `ecosystemEnvelope.ts` discipline→category adapter with documented banding; `server/ecosystemSync.ts` SQLite outbox + server-side hub push (S2 by construction) + SentiOS TriathleteTracker signals; wired into readiness-calculate and session routes. Fixed vitest picking up Playwright specs. Full verify gate green (17/17).
+
+**Phase 5b OlyState (committed d52faf9):** durable local API (node:sqlite, Triathlete pattern) with GET/PUT /dataset; Observation→ObservationUpsert adapter (observation id = idempotency key); server-side outbox/drain + OlyState SentiOS signals; app dual-mode persistence (API hydrate + localStorage fallback); new verify script — 16/16 + build green.
+
+**Phase 6 hub intelligence (committed 2a88fd3):** `intelligenceService.ts` pure precedence resolution (fresh spoke ≤48h wins, provenance always) + CNS-overreach alert v1 (readiness + red flags; Olbrecht condition C documented for later); `GET /api/ecosystem/athletes/:id/summary`; 9/9 fixture tests via `scripts/test-intelligence.ts`; server tsc clean.
+
+**Contracts:** all SIX vendor locations verified in sync (hub, SSP, OET, Triathlete, OlyState + FormLab Python).
+
+**Commits/pushes:** every repo committed (7 repos in the mid-session checkpoint + 4 unit commits after); tracker pushed to GitHub (Dane-Lee/MasterMind). **SSP push failed — origin `Elite-Recovery-Sports-Therapy/swim-state-pro-2` returns "Repository not found"; owner action needed to recreate/repoint.** Olbrecht/FormLab/AthleteOS/Triathlete/OlyState have no remotes (local + OneDrive only).
+
+**Improvements logged (Batch 3, F1–F7):** publish-on-lazy-compute for Triathlete, direct athleteId on OlyState observations, dataset revision counter before multi-device, alert condition C, panel view-model for the summary endpoint, vendored-lint policy, sqlite driver split note.
+
+**Resume next:** owner decisions on the Control Center proposal's 4 questions → design-token package → Control Center build → app-by-app UX/visual pass (owner priority: "sleek, seamless, sexy"). Live verification of Phases 2–6 still gated on hub bring-up. Remaining backlog unchanged otherwise (B3/S6, B5, B6, A4, S1, S4, S5, F-items).
