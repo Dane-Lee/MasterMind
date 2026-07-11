@@ -171,3 +171,7 @@ Owner approved the recommended order (E-refinements → Phase 5 → Phase 6) and
 **Improvements logged (Batch 3, F1–F7):** publish-on-lazy-compute for Triathlete, direct athleteId on OlyState observations, dataset revision counter before multi-device, alert condition C, panel view-model for the summary endpoint, vendored-lint policy, sqlite driver split note.
 
 **Resume next:** owner decisions on the Control Center proposal's 4 questions → design-token package → Control Center build → app-by-app UX/visual pass (owner priority: "sleek, seamless, sexy"). Live verification of Phases 2–6 still gated on hub bring-up. Remaining backlog unchanged otherwise (B3/S6, B5, B6, A4, S1, S4, S5, F-items).
+
+## 2026-07-11 — Session 9 addendum: Control Center ratified
+
+Owner answered all 4 Control Center decisions via structured choice (recommended option on each): (1) vendored shared panel, (2) header constellation icon with live status dot + Ctrl+E in all six apps, (3) hybrid pair→flow toggles with On/Pause-but-queue/Off (presets deferred to v2), (4) signature dark-glass identity independent of host theme. Ratification recorded in the proposal header; 4 build milestones added to the Ecosystem Integration project (eco-design-tokens → aos-ecosystem-status-endpoint → eco-connection-settings → eco-control-center-panel). Next session starts the design-token package.

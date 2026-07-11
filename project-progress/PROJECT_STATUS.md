@@ -15,7 +15,7 @@ Manual milestone records are the source of truth. Evidence scans and verificatio
 | FormLab | Biomechanics and technical execution system for swim and lift analysis using force, motion, video, and physics-oriented movement data. | 8/13 done; 3 todo; 0 confirm; 1 blocked; 1 deferred | Choose Engine SQLite read endpoints or Supabase serialization as the single integration path. | Align App and Engine schemas and choose one data store strategy |
 | Swim State Pro | Readiness, rhythm, taper, fatigue, and performance prediction layer for swim training decisions. | 13/18 done; 3 todo; 0 confirm; 0 blocked; 1 deferred | Write README deployment section and choose Vercel or Netlify config. | None recorded |
 | Olbrecht Energy Tracker | Metabolic energy-system planning and mismatch detection system for swim training based on Olbrecht-style physiological logic. | 7/16 done; 6 todo; 2 confirm; 0 blocked; 0 deferred | Wire createSessionPlan/Response/DerivedMetrics envelope enqueue into the session save flows once the sessions feature UI lands. | None recorded |
-| Ecosystem Integration | Cross-cutting unification layer: shared contracts, canonical athlete identity, hub-and-spoke transport, and flow specifications that let all systems communicate while remaining standalone. | 6/6 done; 0 todo; 0 confirm; 0 blocked; 0 deferred | No open milestone recorded. | None recorded |
+| Ecosystem Integration | Cross-cutting unification layer: shared contracts, canonical athlete identity, hub-and-spoke transport, and flow specifications that let all systems communicate while remaining standalone. | 6/10 done; 4 todo; 0 confirm; 0 blocked; 0 deferred | Create packages/ecosystem-design-tokens (CSS variables + TS constants), vendored like the contracts; dark glass is the signature identity, light variant included. | None recorded |
 
 ## Completed Since Last Check-In
 
@@ -241,7 +241,10 @@ Needs Confirmation:
 - None recorded
 
 Open Next Actions:
-- None recorded
+- Ecosystem design-token package (color/type/spacing/radius/elevation/motion, dark-first) [todo].  Next: Create packages/ecosystem-design-tokens (CSS variables + TS constants), vendored like the contracts; dark glass is the signature identity, light variant included.
+- Hub GET /api/ecosystem/status (apps, last envelope per flow, outbox depths, alerts) [todo].  Next: Aggregate service_clients + sync_envelopes + intelligence alerts into one panel-ready endpoint; add ?view=panel trimmed shape (improvement F5).
+- Per-flow connection settings contract (On/Pause/Off) + worker enforcement in every spoke [todo].  Next: Define the settings shape in the contracts package; add the check to each outbox/inbox worker (Pause keeps queuing, Off skips enqueue); mirror state to the hub for panel rendering.
+- Build @ecosystem/control-center (constellation, particle flows, pair->flow toggles, dark glass) [todo].  Next: After tokens + status endpoint: vendorable React panel, overlay + standalone modes, flows.ts-generated map, header icon with live status dot + Ctrl+E summon; then vendor into all six apps.
 
 ## Status Semantics
 

@@ -1577,6 +1577,50 @@
           "blocker": null,
           "nextAction": "Wire into the FormLab Engine in Phase 3 (fl-consume-python-bindings).",
           "notes": "Blocked-by-sequence on the JSON Schema mirror, which is part of finishing eco-contracts-package."
+        },
+        {
+          "id": "eco-design-tokens",
+          "title": "Ecosystem design-token package (color/type/spacing/radius/elevation/motion, dark-first)",
+          "status": "todo",
+          "completedAt": null,
+          "source": "Owner UX/visual mandate 2026-07-10 + Control Center ratification 2026-07-11",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Create packages/ecosystem-design-tokens (CSS variables + TS constants), vendored like the contracts; dark glass is the signature identity, light variant included.",
+          "notes": "Prerequisite for the Control Center and the per-app visual upgrade passes."
+        },
+        {
+          "id": "aos-ecosystem-status-endpoint",
+          "title": "Hub GET /api/ecosystem/status (apps, last envelope per flow, outbox depths, alerts)",
+          "status": "todo",
+          "completedAt": null,
+          "source": "ECOSYSTEM_CONTROL_CENTER_PROPOSAL.md (ratified 2026-07-11)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Aggregate service_clients + sync_envelopes + intelligence alerts into one panel-ready endpoint; add ?view=panel trimmed shape (improvement F5).",
+          "notes": null
+        },
+        {
+          "id": "eco-connection-settings",
+          "title": "Per-flow connection settings contract (On/Pause/Off) + worker enforcement in every spoke",
+          "status": "todo",
+          "completedAt": null,
+          "source": "ECOSYSTEM_CONTROL_CENTER_PROPOSAL.md decision 3 (hybrid pairs->flows)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "Define the settings shape in the contracts package; add the check to each outbox/inbox worker (Pause keeps queuing, Off skips enqueue); mirror state to the hub for panel rendering.",
+          "notes": "Toggles only ever reduce traffic - standalone rule intact."
+        },
+        {
+          "id": "eco-control-center-panel",
+          "title": "Build @ecosystem/control-center (constellation, particle flows, pair->flow toggles, dark glass)",
+          "status": "todo",
+          "completedAt": null,
+          "source": "ECOSYSTEM_CONTROL_CENTER_PROPOSAL.md (all 4 decisions ratified 2026-07-11)",
+          "evidence": null,
+          "blocker": null,
+          "nextAction": "After tokens + status endpoint: vendorable React panel, overlay + standalone modes, flows.ts-generated map, header icon with live status dot + Ctrl+E summon; then vendor into all six apps.",
+          "notes": "Presets (\"Race season\") deferred to v2."
         }
       ],
       "checkIns": [
